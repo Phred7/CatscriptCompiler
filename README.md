@@ -12,6 +12,7 @@ For the project leader, please follow these instructions
     - Going to <https://github.com/new>
     - Enter the name `csci-468-spring2021-private`
     - Select `Private`
+    - **DO NOT ADD A README.MD or .gitignore!**
     - Navigate to the `Settings` -> `Manage Access` section
     - Add `1cg` as a collaborator
     - Add your partner as a collaborator
@@ -24,7 +25,7 @@ Next, you and your partner should both add the class repository as an upstream g
 ```bash
 $ git remote add upstream https://github.com/msu/csci-468-spring2021.git
 $ git pull upstream main
-$ git push origin main
+$ git push
 ```
 This will synchronize your private repository with the class repository.
 
@@ -53,19 +54,23 @@ statement = for_statement |
             assignment_statement |
             function_call_statement;
 
-for_statement = 'for', '(', identifier, 'in', expression ')', '{', { statement }, '}';
+for_statement = 'for', '(', IDENTIFIER, 'in', expression ')', 
+                '{', { statement }, '}';
 
-if_statement = 'if', '(', expression, ')', '{', { statement }, '}' [ 'else', '{', { statement }, '}' ];
+if_statement = 'if', '(', expression, ')', '{', 
+                    { statement }, 
+               '}' [ 'else', ( if_statement | '{', { statement }, '}' ) ];
 
 print_statement = 'print', '(', expression, ')'
 
-variable_statement = 'var', identifier, [':', type_expression, ] '=', expression;
+variable_statement = 'var', IDENTIFIER, 
+     [':', type_expression, ] '=', expression;
 
 function_call_statement = function_call;
 
-assignment_statement = identifier, '=', expression;
+assignment_statement = IDENTIFIER, '=', expression;
 
-function_declaration = 'function', identifier, '(', parameter_list, ')' + 
+function_declaration = 'function', IDENTIFIER, '(', parameter_list, ')' + 
                        [ ':' + type_expression ] + "{" + { function_body_statement } + "}";
 
 function_body_statement = statement |
