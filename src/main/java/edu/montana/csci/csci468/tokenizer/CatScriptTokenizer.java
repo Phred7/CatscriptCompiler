@@ -83,7 +83,13 @@ public class CatScriptTokenizer {
         } else if(matchAndConsume('-')) {
             tokenList.addToken(MINUS, "-", start, postion, line, lineOffset);
         } else if(matchAndConsume('/')) {
-            if(matchAndConsume('/')){ //sdfgnsp
+            if(matchAndConsume('*')){
+                while(!(src.charAt(postion - 1) == '*' && peek() == '/') && !tokenizationEnd()){
+                    //TODO: if newline make sure to update line field
+                    takeChar();
+                }
+                matchAndConsume('/');
+            }else if(matchAndConsume('/')){
                 while(peek() != '\n' && !tokenizationEnd()){
                     takeChar();
                 }

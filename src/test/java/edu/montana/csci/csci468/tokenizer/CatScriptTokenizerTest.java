@@ -91,6 +91,12 @@ public class CatScriptTokenizerTest extends CatscriptTestBase {
     }
 
     @Test
+    public void multiLineCommentsAreIgnored(){
+        assertTokensAre("/* test */ 1",
+                INTEGER, EOF);
+    }
+
+    @Test
     public void compoundTokensTokenizeProperly() {
         assertTokensAre("1+2", INTEGER, PLUS, INTEGER, EOF);
         assertTokensAre("\"\".\"\"", STRING, DOT, STRING, EOF);
