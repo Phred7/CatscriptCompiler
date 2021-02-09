@@ -24,8 +24,8 @@
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running edu.montana.csci.csci468.tokenizer.CatScriptTokenizerTest
-[ERROR] Tests run: 16, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.052 s <<< FAILURE! - in edu.montana.csci.csci468.tokenizer.CatScriptTokenizerTest
-[ERROR] linesAreCorrect  Time elapsed: 0.006 s  <<< FAILURE!
+[ERROR] Tests run: 16, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.093 s <<< FAILURE! - in edu.montana.csci.csci468.tokenizer.CatScriptTokenizerTest
+[ERROR] linesAreCorrect  Time elapsed: 0.009 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
 	at edu.montana.csci.csci468.tokenizer.CatScriptTokenizerTest.linesAreCorrect(CatScriptTokenizerTest.java:108)
 
@@ -33,7 +33,7 @@ org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
 org.opentest4j.AssertionFailedError: expected: <[STRING, DOT, STRING, EOF]> but was: <[ERROR, STRING, ERROR, EOF]>
 	at edu.montana.csci.csci468.tokenizer.CatScriptTokenizerTest.compoundTokensTokenizeProperly(CatScriptTokenizerTest.java:96)
 
-[ERROR] lineOffsetsAreCorrect  Time elapsed: 0 s  <<< FAILURE!
+[ERROR] lineOffsetsAreCorrect  Time elapsed: 0.002 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <0> but was: <-1>
 	at edu.montana.csci.csci468.tokenizer.CatScriptTokenizerTest.lineOffsetsAreCorrect(CatScriptTokenizerTest.java:115)
 
@@ -55,8 +55,8 @@ org.opentest4j.AssertionFailedError: expected: <[ERROR, EOF]> but was: <[IDENTIF
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.677 s
-[INFO] Finished at: 2021-02-08T18:34:43-07:00
+[INFO] Total time:  2.876 s
+[INFO] Finished at: 2021-02-09T11:07:04-07:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.1:test (default-test) on project CSCI_466_Project: There are test failures.
 [ERROR] 
