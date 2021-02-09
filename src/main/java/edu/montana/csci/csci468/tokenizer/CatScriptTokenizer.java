@@ -39,10 +39,10 @@ public class CatScriptTokenizer {
     }
 
     private boolean scanString() {
+        String str = "";
         if(isQuote(peek())){
             matchAndConsume('"');
             int start = postion;
-            String str = "";
             while(!isQuote(peek()) && !tokenizationEnd()){
                 char c = takeChar();
                 str += c;
@@ -56,17 +56,21 @@ public class CatScriptTokenizer {
                     }
                 }
             }
+            if(tokenizationEnd() && !isQuote(peek())){
+                tokenList.addToken(ERROR, str, start, postion, line, lineOffset);
+                return true;
+            } else if(start == postion){
+                char c = takeChar();
+                tokenList.addToken(STRING, str, start, postion, line, lineOffset);
+                return true;
+            }else if(!isQuote(peek())){
+                tokenList.addToken(ERROR, str, start, postion, line, lineOffset);
+                return true;
+            }
             postion--;
         }
         return false;
         // TODO implement string scanning here!
-    }
-
-    private boolean isQuote(char c) {
-        if(c == '"') {
-            return true;
-        }
-        return false;
     }
 
     private boolean scanIdentifier() {
@@ -175,9 +179,12 @@ public class CatScriptTokenizer {
             char c = peek();
             if (c == ' ' || c == '\r' || c == '\t') {
                 postion++;
+                lineOffset++;
                 continue;
             } else if (c == '\n') {
                 postion++;
+                lineOffset = 0;
+                line++;
                 continue;
             }
             break;
@@ -210,6 +217,7 @@ public class CatScriptTokenizer {
     private char takeChar() {
         char c = src.charAt(postion);
         postion++;
+        lineOffset++;
         return c;
     }
 
@@ -227,5 +235,12 @@ public class CatScriptTokenizer {
 
     public TokenList getTokens() {
         return tokenList;
+    }
+
+    private boolean isQuote(char c) {
+        if(c == '"') {
+            return true;
+        }
+        return false;
     }
 }
