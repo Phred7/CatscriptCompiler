@@ -69,7 +69,7 @@ public class CatScriptTokenizer {
             }
             postion--;
         }
-        return false;
+        return false; //return false;
         // TODO implement string scanning here!
     }
 
