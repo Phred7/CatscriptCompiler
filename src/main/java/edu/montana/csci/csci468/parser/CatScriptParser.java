@@ -8,6 +8,8 @@ import edu.montana.csci.csci468.tokenizer.TokenList;
 import edu.montana.csci.csci468.tokenizer.TokenType;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static edu.montana.csci.csci468.tokenizer.TokenType.*;
 
@@ -150,9 +152,26 @@ public class CatScriptParser {
     private Expression parsePrimaryExpression() {
         if (tokens.match(IDENTIFIER)) {
             Token identifierToken = tokens.consumeToken();
-            IdentifierExpression identifierExpression = new IdentifierExpression(identifierToken.getStringValue());
-            identifierExpression.setToken(identifierToken);
-            return identifierExpression;
+            if(tokens.match(LEFT_PAREN)){ //FUNCTION CALL
+                tokens.consumeToken();
+                List<Expression> args = new ArrayList<>();
+                while(!tokens.match(RIGHT_PAREN) && !tokens.match(EOF)){
+                    Expression elem = parseExpression();
+                    args.add(elem);
+                    if(tokens.match(COMMA)) {
+                        tokens.consumeToken(); // comma
+                    }
+                }
+                FunctionCallExpression functionCallExpression = new FunctionCallExpression(identifierToken.getStringValue(), args);
+                if(!tokens.match(RIGHT_PAREN)){ //UNTERMINATED_ARG_LIST Check
+                    functionCallExpression.addError(ErrorType.UNTERMINATED_ARG_LIST);
+                }
+                return functionCallExpression;
+            }else {
+                IdentifierExpression identifierExpression = new IdentifierExpression(identifierToken.getStringValue());
+                identifierExpression.setToken(identifierToken);
+                return identifierExpression;
+            }
         } else if (tokens.match(STRING)) {
             Token stringToken = tokens.consumeToken();
             StringLiteralExpression stringExpression = new StringLiteralExpression(stringToken.getStringValue());
@@ -178,7 +197,37 @@ public class CatScriptParser {
             NullLiteralExpression nullExpression = new NullLiteralExpression();
             nullExpression.setToken(nullToken);
             return nullExpression;
-        } else {
+        } else if (tokens.match(LEFT_BRACKET)){ //LIST LITERAL
+            tokens.consumeToken();
+            List<Expression> list = new ArrayList<>();
+            while(!tokens.match(RIGHT_BRACKET) && !tokens.match(EOF)) {
+                Expression elem = parseExpression();
+                list.add(elem);
+                if (tokens.match(COMMA)){
+                    tokens.consumeToken();
+                }
+            }
+            ListLiteralExpression listLiteralExpression = new ListLiteralExpression(list);
+            if(!tokens.match(RIGHT_BRACKET)) {
+                listLiteralExpression.addError(ErrorType.UNTERMINATED_LIST);
+            }
+            return listLiteralExpression;
+        } else if (tokens.match(LEFT_PAREN)){
+            Token leftParenToken = tokens.consumeToken();
+            Expression rhs = parseExpression();
+            ParenthesizedExpression parenthesizedExpression = new ParenthesizedExpression(rhs);
+            //parenthesizedExpression.setToken(leftParenToken);
+            parenthesizedExpression.setStart(leftParenToken);
+            parenthesizedExpression.setEnd(require(RIGHT_PAREN, rhs));
+            return parenthesizedExpression;
+        /*} else if (tokens.match(RIGHT_PAREN)){
+        Token rightParenToken = tokens.consumeToken();
+        Expression rhs = parseExpression();
+        ParenthesizedExpression parenthesizedExpression = new ParenthesizedExpression(rhs);
+        //parenthesizedExpression.setToken(leftParenToken);
+        //boolean leftParen = tokens.match(LEFT_PAREN);
+        return parenthesizedExpression;*/
+        }else {
             SyntaxErrorExpression syntaxErrorExpression = new SyntaxErrorExpression(tokens.consumeToken());
             return syntaxErrorExpression;
         }
