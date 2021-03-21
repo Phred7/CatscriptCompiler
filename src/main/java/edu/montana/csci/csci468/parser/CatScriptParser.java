@@ -208,8 +208,10 @@ public class CatScriptParser {
                 }
             }
             ListLiteralExpression listLiteralExpression = new ListLiteralExpression(list);
-            if(!tokens.match(RIGHT_BRACKET)) {
+            if (!tokens.match(RIGHT_BRACKET)) {
                 listLiteralExpression.addError(ErrorType.UNTERMINATED_LIST);
+            } else {
+                tokens.consumeToken();
             }
             return listLiteralExpression;
         } else if (tokens.match(LEFT_PAREN)){
@@ -248,5 +250,4 @@ public class CatScriptParser {
             return tokens.getCurrentToken();
         }
     }
-
 }

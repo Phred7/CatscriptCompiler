@@ -51,9 +51,7 @@ public class FactorExpression extends Expression {
     }
 
     @Override
-    public CatscriptType getType() {
-        return CatscriptType.INT;
-    }
+    public CatscriptType getType() { return CatscriptType.INT; }
 
     //==============================================================
     // Implementation
@@ -61,7 +59,14 @@ public class FactorExpression extends Expression {
 
     @Override
     public Object evaluate(CatscriptRuntime runtime) {
-        return super.evaluate(runtime);
+        Integer lhs = (Integer) leftHandSide.evaluate(runtime);
+        Integer rhs = (Integer) rightHandSide.evaluate(runtime);
+        if (isMultiply()) {
+            return lhs * rhs;
+        } else {
+            return lhs / rhs;
+        }
+        //return super.evaluate(runtime);
     }
 
     @Override
