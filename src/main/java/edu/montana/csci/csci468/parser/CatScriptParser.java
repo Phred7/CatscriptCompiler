@@ -1,5 +1,6 @@
 package edu.montana.csci.csci468.parser;
 
+import com.sun.source.tree.IdentifierTree;
 import edu.montana.csci.csci468.parser.expressions.*;
 import edu.montana.csci.csci468.parser.statements.*;
 import edu.montana.csci.csci468.tokenizer.CatScriptTokenizer;
@@ -7,8 +8,11 @@ import edu.montana.csci.csci468.tokenizer.Token;
 import edu.montana.csci.csci468.tokenizer.TokenList;
 import edu.montana.csci.csci468.tokenizer.TokenType;
 
+import javax.swing.plaf.nimbus.State;
 import java.awt.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static edu.montana.csci.csci468.tokenizer.TokenType.*;
@@ -56,6 +60,24 @@ public class CatScriptParser {
         Statement printStmt = parsePrintStatement();
         if (printStmt != null) {
             return printStmt;
+        } else if (tokens.match(VAR)) {
+            return parseVariableStatement();
+        } else if (tokens.match(IF)) {
+            return parseIfStatement();
+        } else if (tokens.match(FOR)) {
+            return parseForStatement();
+        } else if (tokens.match(IDENTIFIER)) {
+            Token ident = tokens.consumeToken();
+            if (tokens.match(EQUAL)) {
+                 AssignmentStatement assignStmt = new AssignmentStatement();
+                 assignStmt.setStart(ident);
+                 assignStmt.setVariableName(ident.getStringValue());
+                 return parseAssignmentStatement(assignStmt);
+                //assignment
+            } else {
+                return parseFunctionCallStatement(ident);
+                //function call
+            }
         }
         return new SyntaxErrorStatement(tokens.consumeToken());
     }
@@ -74,6 +96,74 @@ public class CatScriptParser {
         } else {
             return null;
         }
+    }
+
+    private Statement parseVariableStatement() {
+        VariableStatement variableStatement = new VariableStatement();
+        variableStatement.setStart(tokens.consumeToken());
+        Token variableName = require(IDENTIFIER, variableStatement);
+        if(tokens.matchAndConsume(COLON)) {
+            //Token explicitType = require(IDENTIFIER, variableStatement);
+            //variableStatement.setExplicitType(parseTypeExpression(explicitType));
+            TypeLiteral explicitType = parseTypeExpression();
+            variableStatement.setExplicitType(explicitType.getType());
+
+        }
+        require(EQUAL, variableStatement);
+        variableStatement.setExpression(parseExpression());
+        variableStatement.setEnd(tokens.getCurrentToken());
+        variableStatement.setVariableName(variableName.getStringValue());
+        return variableStatement;
+    }
+
+    private Statement parseIfStatement() {
+        IfStatement ifStatement = new IfStatement();
+        LinkedList<Statement> trueStatements = new LinkedList<Statement>();
+        LinkedList<Statement> elseStatements = new LinkedList<Statement>();
+        ifStatement.setStart(tokens.consumeToken());
+        require(LEFT_PAREN, ifStatement);
+        Expression condition = parseExpression();
+        require(RIGHT_PAREN, ifStatement);
+        require(LEFT_BRACKET, ifStatement);
+        while(!tokens.match(RIGHT_BRACKET)) {
+            Statement statements = parseProgramStatement();
+            trueStatements.add(statements);
+        }
+        require(RIGHT_BRACKET, ifStatement);
+        if (tokens.matchAndConsume(ELSE)) {
+            if(tokens.match(LEFT_BRACKET)) {
+
+                //do else stuff (parseGroupOfStatments)
+            } else {
+                parseIfStatement(); //recurse
+            }
+        }
+
+        ifStatement.setExpression(condition);
+        ifStatement.setTrueStatements(trueStatements);
+        ifStatement.setElseStatements(elseStatements);
+        return ifStatement;
+    }
+
+    private Statement parseForStatement () {
+        ForStatement forStatement = new ForStatement();
+        Token start  = tokens.consumeToken();
+        require(LEFT_PAREN, forStatement);
+        Token loopIdentifier = require(IDENTIFIER, forStatement);
+
+        //call more setters
+        forStatement.setVariableName(loopIdentifier.getStringValue());
+        return forStatement;
+    }
+
+    private Statement parseAssignmentStatement(AssignmentStatement assignmentStatement) {
+        return null;
+    }
+
+    private Statement parseFunctionCallStatement(Token functCallIdentifier) {
+        //FunctionCallExpression funcCallExpr = parseFunctionCallStatement(ident);
+        //FunctionCallStatement funcStmt = new FunctionCallStatement(functionCallExpr);
+        return null;
     }
 
     //============================================================
@@ -218,21 +308,63 @@ public class CatScriptParser {
             Token leftParenToken = tokens.consumeToken();
             Expression rhs = parseExpression();
             ParenthesizedExpression parenthesizedExpression = new ParenthesizedExpression(rhs);
-            //parenthesizedExpression.setToken(leftParenToken);
             parenthesizedExpression.setStart(leftParenToken);
             parenthesizedExpression.setEnd(require(RIGHT_PAREN, rhs));
             return parenthesizedExpression;
-        /*} else if (tokens.match(RIGHT_PAREN)){
-        Token rightParenToken = tokens.consumeToken();
-        Expression rhs = parseExpression();
-        ParenthesizedExpression parenthesizedExpression = new ParenthesizedExpression(rhs);
-        //parenthesizedExpression.setToken(leftParenToken);
-        //boolean leftParen = tokens.match(LEFT_PAREN);
-        return parenthesizedExpression;*/
         }else {
             SyntaxErrorExpression syntaxErrorExpression = new SyntaxErrorExpression(tokens.consumeToken());
             return syntaxErrorExpression;
         }
+    }
+
+    private CatscriptType parseTypeExpression(Token token){
+        if (token.getStringValue() == "int") {
+            return CatscriptType.INT;
+        } else if (token.getStringValue() == "string") {
+            return CatscriptType.STRING;
+        } else if (token.getStringValue() == "bool") {
+            return CatscriptType.BOOLEAN;
+        } else if (token.getStringValue() == "object") {
+            return CatscriptType.OBJECT;
+        }
+        return null;
+    }
+
+    private TypeLiteral parseTypeExpression(){
+        Token startToken = tokens.consumeToken();
+        if(startToken.getType() == IDENTIFIER) {
+            if (startToken.getStringValue().equals("int")) {
+                TypeLiteral typeLiteral = new TypeLiteral();
+                typeLiteral.setToken(startToken);
+                typeLiteral.setType(CatscriptType.INT);
+                return typeLiteral;
+            } else if (startToken.getStringValue().equals("bool")) {
+                TypeLiteral typeLiteral = new TypeLiteral();
+                typeLiteral.setToken(startToken);
+                typeLiteral.setType(CatscriptType.BOOLEAN);
+                return typeLiteral;
+            } else if (startToken.getStringValue().equals("list")) {
+                if (tokens.matchAndConsume(LESS)) {
+                    TypeLiteral componentTypeLiteral = parseTypeExpression();
+                    CatscriptType componentType = componentTypeLiteral.getType();
+                    CatscriptType listType = CatscriptType.getListType(componentType);
+                    TypeLiteral typeLiteral = new TypeLiteral();
+                    typeLiteral.setStart(startToken);
+                    typeLiteral.setType(listType);
+                    return typeLiteral;
+                } else {
+                    TypeLiteral typeLiteral = new TypeLiteral();
+                    typeLiteral.setType(CatscriptType.getListType(CatscriptType.OBJECT));
+                    return typeLiteral;
+                }
+            }else if (startToken.getStringValue().equals("object")) {
+                TypeLiteral typeLiteral = new TypeLiteral();
+                typeLiteral.setToken(startToken);
+                typeLiteral.setType(CatscriptType.OBJECT);
+                return typeLiteral;
+            }
+        }
+        return null;
     }
 
     //============================================================

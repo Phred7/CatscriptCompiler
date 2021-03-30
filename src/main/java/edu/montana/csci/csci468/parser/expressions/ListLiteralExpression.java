@@ -7,7 +7,6 @@ import edu.montana.csci.csci468.parser.SymbolTable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ListLiteralExpression extends Expression {
@@ -15,7 +14,7 @@ public class ListLiteralExpression extends Expression {
     private CatscriptType type;
 
     public ListLiteralExpression(List<Expression> values) {
-        this.values = new LinkedList<>();
+        this.values = new ArrayList<>();
         for (Expression value : values) {
             this.values.add(addChild(value));
         }
@@ -49,6 +48,7 @@ public class ListLiteralExpression extends Expression {
 
     @Override
     public Object evaluate(CatscriptRuntime runtime) {
+        //List<> list = new ArrayList<>(linkedlist);
         return getValues();
     }
 
