@@ -10,6 +10,7 @@ import edu.montana.csci.csci468.tokenizer.TokenType;
 
 import javax.swing.plaf.nimbus.State;
 import java.awt.*;
+import java.lang.module.ModuleDescriptor;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -57,6 +58,15 @@ public class CatScriptParser {
     //============================================================
 
     private Statement parseProgramStatement() {
+        if(tokens.match(FUNCTION)) {
+            return parseFunctionDefinition();
+        } else {
+            return parseStatement();
+        }
+    }
+
+
+    private Statement parseStatement() {
         Statement printStmt = parsePrintStatement();
         if (printStmt != null) {
             return printStmt;
@@ -69,18 +79,15 @@ public class CatScriptParser {
         } else if (tokens.match(IDENTIFIER)) {
             Token ident = tokens.consumeToken();
             if (tokens.match(EQUAL)) {
-                 AssignmentStatement assignStmt = new AssignmentStatement();
-                 assignStmt.setStart(ident);
-                 assignStmt.setVariableName(ident.getStringValue());
-                 return parseAssignmentStatement(assignStmt);
+                return parseAssignmentStatement(ident);
                 //assignment
             } else {
-                return parseFunctionCallStatement(ident);
-                //function call
+                return parseFunctionCallStatement(ident); //function call
             }
         }
         return new SyntaxErrorStatement(tokens.consumeToken());
     }
+
 
     private Statement parsePrintStatement() {
         if (tokens.match(PRINT)) {
@@ -107,8 +114,12 @@ public class CatScriptParser {
             //variableStatement.setExplicitType(parseTypeExpression(explicitType));
             TypeLiteral explicitType = parseTypeExpression();
             variableStatement.setExplicitType(explicitType.getType());
+            if(tokens.match(GREATER)) {
+                tokens.matchAndConsume(GREATER);
+            }
 
         }
+
         require(EQUAL, variableStatement);
         variableStatement.setExpression(parseExpression());
         variableStatement.setEnd(tokens.getCurrentToken());
@@ -124,18 +135,21 @@ public class CatScriptParser {
         require(LEFT_PAREN, ifStatement);
         Expression condition = parseExpression();
         require(RIGHT_PAREN, ifStatement);
-        require(LEFT_BRACKET, ifStatement);
-        while(!tokens.match(RIGHT_BRACKET)) {
+        require(LEFT_BRACE, ifStatement);
+        while(!tokens.match(RIGHT_BRACE) && !tokens.match(EOF)) {
             Statement statements = parseProgramStatement();
             trueStatements.add(statements);
         }
-        require(RIGHT_BRACKET, ifStatement);
+        require(RIGHT_BRACE, ifStatement);
         if (tokens.matchAndConsume(ELSE)) {
-            if(tokens.match(LEFT_BRACKET)) {
-
-                //do else stuff (parseGroupOfStatments)
+            if(tokens.match(LEFT_BRACE)) {
+                while(!tokens.match(RIGHT_BRACE) && !tokens.match(EOF)) {
+                    Statement statements = parseProgramStatement();
+                    elseStatements.add(statements);
+                }
+                require(RIGHT_BRACE, ifStatement);
             } else {
-                parseIfStatement(); //recurse
+                elseStatements.add(parseIfStatement());
             }
         }
 
@@ -150,21 +164,43 @@ public class CatScriptParser {
         Token start  = tokens.consumeToken();
         require(LEFT_PAREN, forStatement);
         Token loopIdentifier = require(IDENTIFIER, forStatement);
-
-        //call more setters
+        require(IN, forStatement);
+        Expression condition = parseExpression();
+        require(RIGHT_PAREN, forStatement);
+        require(LEFT_BRACE, forStatement);
+        List<Statement> body = new LinkedList<>();
+        while (!tokens.match(RIGHT_BRACE) && !tokens.match(EOF)) {
+            body.add(parseProgramStatement());
+        }
+        require(RIGHT_BRACE, forStatement);
         forStatement.setVariableName(loopIdentifier.getStringValue());
+        forStatement.setStart(start);
+        forStatement.setExpression(condition);
+        forStatement.setBody(body);
         return forStatement;
     }
 
-    private Statement parseAssignmentStatement(AssignmentStatement assignmentStatement) {
+    private Statement parseAssignmentStatement(Token assignmentIdentifier) {
+        AssignmentStatement assignStmt = new AssignmentStatement();
+        require(EQUAL, assignStmt);
+        assignStmt.setStart(assignmentIdentifier);
+        assignStmt.setExpression(parseExpression());
+        assignStmt.setVariableName(assignmentIdentifier.getStringValue());
+        return assignStmt;
+    }
+
+    private Statement parseFunctionDefinition () {
+        //function_declaration = 'function', IDENTIFIER, '(', parameter_list, ')' + [ ':' + type_expression ] + "{" + { function_body_statement } + "}";
         return null;
     }
 
-    private Statement parseFunctionCallStatement(Token functCallIdentifier) {
-        //FunctionCallExpression funcCallExpr = parseFunctionCallStatement(ident);
-        //FunctionCallStatement funcStmt = new FunctionCallStatement(functionCallExpr);
+    private Statement parseFunctionCallStatement(Token functionIdentifier) {
+        //require(LEFT_PAREN, )
+        //FunctionCallExpression funcCallExpr = new FunctionCallExpression(functionIdentifier.getStringValue(), );
+        //FunctionCallStatement funcStmt = new FunctionCallStatement(funcCallExpr);
         return null;
     }
+
 
     //============================================================
     //  Expressions
@@ -317,7 +353,7 @@ public class CatScriptParser {
         }
     }
 
-    private CatscriptType parseTypeExpression(Token token){
+    /*private CatscriptType parseTypeExpression(Token token){
         if (token.getStringValue() == "int") {
             return CatscriptType.INT;
         } else if (token.getStringValue() == "string") {
@@ -328,7 +364,7 @@ public class CatScriptParser {
             return CatscriptType.OBJECT;
         }
         return null;
-    }
+    }*/
 
     private TypeLiteral parseTypeExpression(){
         Token startToken = tokens.consumeToken();
@@ -357,6 +393,11 @@ public class CatScriptParser {
                     typeLiteral.setType(CatscriptType.getListType(CatscriptType.OBJECT));
                     return typeLiteral;
                 }
+            }else if (startToken.getStringValue().equals("string")) {
+                TypeLiteral typeLiteral = new TypeLiteral();
+                typeLiteral.setToken(startToken);
+                typeLiteral.setType(CatscriptType.STRING);
+                return typeLiteral;
             }else if (startToken.getStringValue().equals("object")) {
                 TypeLiteral typeLiteral = new TypeLiteral();
                 typeLiteral.setToken(startToken);
