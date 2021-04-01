@@ -59,7 +59,7 @@ public class CatScriptParser {
 
     private Statement parseProgramStatement() {
         if(tokens.match(FUNCTION)) {
-            return parseFunctionDefinition();
+            return parseFunctionDefinitionStatement();
         } else {
             return parseStatement();
         }
@@ -110,14 +110,11 @@ public class CatScriptParser {
         variableStatement.setStart(tokens.consumeToken());
         Token variableName = require(IDENTIFIER, variableStatement);
         if(tokens.matchAndConsume(COLON)) {
-            //Token explicitType = require(IDENTIFIER, variableStatement);
-            //variableStatement.setExplicitType(parseTypeExpression(explicitType));
             TypeLiteral explicitType = parseTypeExpression();
             variableStatement.setExplicitType(explicitType.getType());
             if(tokens.match(GREATER)) {
                 tokens.matchAndConsume(GREATER);
             }
-
         }
 
         require(EQUAL, variableStatement);
@@ -189,9 +186,39 @@ public class CatScriptParser {
         return assignStmt;
     }
 
-    private Statement parseFunctionDefinition () {
+    private Statement parseFunctionDefinitionStatement() {
         //function_declaration = 'function', IDENTIFIER, '(', parameter_list, ')' + [ ':' + type_expression ] + "{" + { function_body_statement } + "}";
-        return null;
+        Token startToken = tokens.consumeToken();
+        FunctionDefinitionStatement functionDefinitionStatement = new FunctionDefinitionStatement();
+        functionDefinitionStatement.setStart(startToken);
+        Token functionName = require(IDENTIFIER, functionDefinitionStatement);
+        require(LEFT_PAREN, functionDefinitionStatement);
+        List<CatscriptType> argumentTypeList = new ArrayList<>();
+        List<String> argumentList = new ArrayList<>();
+        while (!tokens.match(RIGHT_PAREN) && !tokens.match(EOF)) {
+            Token paramIdentifier = require(IDENTIFIER, functionDefinitionStatement);
+            if(tokens.matchAndConsume(COLON)) {
+                functionDefinitionStatement.addParameter(paramIdentifier.getStringValue(), parseTypeExpression());
+            } else {
+                TypeLiteral typeLiteral = new TypeLiteral();
+                typeLiteral.setType(CatscriptType.OBJECT);
+                functionDefinitionStatement.addParameter(paramIdentifier.getStringValue(), typeLiteral);
+            }
+            if (!tokens.match(RIGHT_PAREN)) {
+                require(COMMA, functionDefinitionStatement);
+            }
+        }
+        require(RIGHT_PAREN, functionDefinitionStatement);
+        require(LEFT_BRACE, functionDefinitionStatement);
+        List<Statement> body = new LinkedList<>();
+        while (!tokens.match(RIGHT_BRACE) && !tokens.match(EOF)) {
+            body.add(parseProgramStatement());
+        }
+        require(RIGHT_BRACE, functionDefinitionStatement);
+        functionDefinitionStatement.setType(null);
+        functionDefinitionStatement.setBody(body);
+        functionDefinitionStatement.setName(functionName.getStringValue());
+        return functionDefinitionStatement;
     }
 
     private Statement parseFunctionCallStatement(Token functionIdentifier) {
