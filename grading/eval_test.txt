@@ -34,29 +34,25 @@
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running edu.montana.csci.csci468.parser.CatscriptParserExpressionsTest
-[INFO] Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.264 s - in edu.montana.csci.csci468.parser.CatscriptParserExpressionsTest
+[INFO] Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.134 s - in edu.montana.csci.csci468.parser.CatscriptParserExpressionsTest
 [INFO] Running edu.montana.csci.csci468.parser.CatscriptParserErrorsTest
 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in edu.montana.csci.csci468.parser.CatscriptParserErrorsTest
 [INFO] Running edu.montana.csci.csci468.parser.CatscriptParserStatementsTest
-[ERROR] Tests run: 21, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 0.108 s <<< FAILURE! - in edu.montana.csci.csci468.parser.CatscriptParserStatementsTest
-[ERROR] functionDefStatement  Time elapsed: 0.012 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.parser.CatscriptParserStatementsTest.functionDefStatement(CatscriptParserStatementsTest.java:144)
-
-[ERROR] functionCallStatement  Time elapsed: 0.003 s  <<< ERROR!
+[ERROR] Tests run: 21, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.071 s <<< FAILURE! - in edu.montana.csci.csci468.parser.CatscriptParserStatementsTest
+[ERROR] functionCallStatement  Time elapsed: 0.001 s  <<< ERROR!
 java.lang.NullPointerException
 	at edu.montana.csci.csci468.parser.CatscriptParserStatementsTest.functionCallStatement(CatscriptParserStatementsTest.java:136)
 
-[ERROR] functionDefWithParamsStatement  Time elapsed: 0.003 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.parser.CatscriptParserStatementsTest.functionDefWithParamsStatement(CatscriptParserStatementsTest.java:152)
+[ERROR] returnStatementNoExprInFunction  Time elapsed: 0.003 s  <<< ERROR!
+edu.montana.csci.csci468.parser.ParseErrorException: 
+Parse Errors Occurred:
 
-[ERROR] functionDefWithParamTypesStatement  Time elapsed: 0.008 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.parser.CatscriptParserStatementsTest.functionDefWithParamTypesStatement(CatscriptParserStatementsTest.java:166)
+Line 1:function x() {return}
+                    ^
 
-[ERROR] returnStatementNoExprInFunction  Time elapsed: 0.007 s  <<< ERROR!
-java.lang.NullPointerException
+Error: Unexpected Token
+
+
 	at edu.montana.csci.csci468.parser.CatscriptParserStatementsTest.returnStatementNoExprInFunction(CatscriptParserStatementsTest.java:180)
 
 [ERROR] returnStatementExprInFunction  Time elapsed: 0.004 s  <<< ERROR!
@@ -64,23 +60,19 @@ java.lang.NullPointerException
 	at edu.montana.csci.csci468.parser.CatscriptParserStatementsTest.returnStatementExprInFunction(CatscriptParserStatementsTest.java:189)
 
 [INFO] Running edu.montana.csci.csci468.parser.CatscriptParserTypeCheckingTest
-[ERROR] Tests run: 10, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.031 s <<< FAILURE! - in edu.montana.csci.csci468.parser.CatscriptParserTypeCheckingTest
-[ERROR] functionCallsWorkProperly  Time elapsed: 0.002 s  <<< ERROR!
+[ERROR] Tests run: 10, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.014 s <<< FAILURE! - in edu.montana.csci.csci468.parser.CatscriptParserTypeCheckingTest
+[ERROR] functionCallsWorkProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.NullPointerException
 	at edu.montana.csci.csci468.parser.CatscriptParserTypeCheckingTest.functionCallsWorkProperly(CatscriptParserTypeCheckingTest.java:38)
 
-[ERROR] assignmentTypeError  Time elapsed: 0.006 s  <<< ERROR!
+[ERROR] assignmentTypeError  Time elapsed: 0.003 s  <<< ERROR!
 java.lang.IllegalStateException: 
 The code var x = 10
 x = true did not throw an error!
 	at edu.montana.csci.csci468.parser.CatscriptParserTypeCheckingTest.assignmentTypeError(CatscriptParserTypeCheckingTest.java:55)
 
 [INFO] Running edu.montana.csci.csci468.parser.CatscriptParserSymbolCheckingTest
-[ERROR] Tests run: 8, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 0.091 s <<< FAILURE! - in edu.montana.csci.csci468.parser.CatscriptParserSymbolCheckingTest
-[ERROR] paramsConflictWithGlobalVars  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.parser.CatscriptParserSymbolCheckingTest.paramsConflictWithGlobalVars(CatscriptParserSymbolCheckingTest.java:46)
-
+[ERROR] Tests run: 8, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.012 s <<< FAILURE! - in edu.montana.csci.csci468.parser.CatscriptParserSymbolCheckingTest
 [ERROR] ifStatementBranchesDoNotConflic  Time elapsed: 0 s  <<< ERROR!
 edu.montana.csci.csci468.parser.ParseErrorException: 
 Parse Errors Occurred:
@@ -93,49 +85,33 @@ Error: Unexpected Token
 
 	at edu.montana.csci.csci468.parser.CatscriptParserSymbolCheckingTest.ifStatementBranchesDoNotConflic(CatscriptParserSymbolCheckingTest.java:59)
 
-[ERROR] paramsDoNotConflictWithEachOther  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.parser.CatscriptParserSymbolCheckingTest.paramsDoNotConflictWithEachOther(CatscriptParserSymbolCheckingTest.java:52)
-
-[ERROR] functionVarConflict  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.parser.CatscriptParserSymbolCheckingTest.functionVarConflict(CatscriptParserSymbolCheckingTest.java:28)
-
-[ERROR] functionFunctionConflict  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.parser.CatscriptParserSymbolCheckingTest.functionFunctionConflict(CatscriptParserSymbolCheckingTest.java:34)
-
-[ERROR] varFunctionConflict  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.parser.CatscriptParserSymbolCheckingTest.varFunctionConflict(CatscriptParserSymbolCheckingTest.java:22)
-
 [INFO] Running edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest
-[ERROR] Tests run: 9, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.051 s <<< FAILURE! - in edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest
-[ERROR] recursiveFunctionWorksProperly  Time elapsed: 0 s  <<< ERROR!
+[ERROR] Tests run: 9, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.076 s <<< FAILURE! - in edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest
+[ERROR] recursiveFunctionWorksProperly  Time elapsed: 0.027 s  <<< ERROR!
 java.lang.NullPointerException
 	at edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest.recursiveFunctionWorksProperly(CatscriptStatementExecutionTest.java:75)
 
-[ERROR] localVarStatementsWorkProperly  Time elapsed: 0.004 s  <<< ERROR!
+[ERROR] localVarStatementsWorkProperly  Time elapsed: 0.006 s  <<< ERROR!
 java.lang.UnsupportedOperationException: execute needs to be implemented for edu.montana.csci.csci468.parser.statements.ForStatement
 	at edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest.localVarStatementsWorkProperly(CatscriptStatementExecutionTest.java:43)
 
-[ERROR] varStatementWorksProperly  Time elapsed: 0 s  <<< ERROR!
+[ERROR] varStatementWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
 java.lang.UnsupportedOperationException: execute needs to be implemented for edu.montana.csci.csci468.parser.statements.VariableStatement
 	at edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest.varStatementWorksProperly(CatscriptStatementExecutionTest.java:32)
 
-[ERROR] functionDeclarationWorksProperly  Time elapsed: 0 s  <<< ERROR!
+[ERROR] functionDeclarationWorksProperly  Time elapsed: 0.003 s  <<< ERROR!
 java.lang.NullPointerException
 	at edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest.functionDeclarationWorksProperly(CatscriptStatementExecutionTest.java:66)
 
-[ERROR] returnStatementWorks  Time elapsed: 0 s  <<< ERROR!
+[ERROR] returnStatementWorks  Time elapsed: 0.001 s  <<< ERROR!
 java.lang.NullPointerException
 	at edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest.returnStatementWorks(CatscriptStatementExecutionTest.java:88)
 
-[ERROR] varInsideFunctionWorksProperly  Time elapsed: 0.003 s  <<< ERROR!
+[ERROR] varInsideFunctionWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
 java.lang.NullPointerException
 	at edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest.varInsideFunctionWorksProperly(CatscriptStatementExecutionTest.java:51)
 
-[ERROR] ifStatementWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
+[ERROR] ifStatementWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
 java.lang.UnsupportedOperationException: execute needs to be implemented for edu.montana.csci.csci468.parser.statements.IfStatement
 	at edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest.ifStatementWorksProperly(CatscriptStatementExecutionTest.java:24)
 
@@ -144,130 +120,3 @@ java.lang.UnsupportedOperationException: execute needs to be implemented for edu
 	at edu.montana.csci.csci468.eval.CatscriptStatementExecutionTest.forStatementWorksProperly(CatscriptStatementExecutionTest.java:61)
 
 [INFO] Running edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest
-[ERROR] Tests run: 14, Failures: 0, Errors: 14, Skipped: 0, Time elapsed: 0.02 s <<< FAILURE! - in edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest
-[ERROR] listTypeWithComponentTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.listTypeWithComponentTypeArgWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:56)
-
-[ERROR] stringTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.stringTypeArgWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:44)
-
-[ERROR] noTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.noTypeArgWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:20)
-
-[ERROR] mutliArgumentFunctionsWork  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.mutliArgumentFunctionsWork(CatscriptFunctionArgsAndReturnEvalTest.java:62)
-
-[ERROR] returnBoolWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.returnBoolWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:88)
-
-[ERROR] returnObjectWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.returnObjectWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:72)
-
-[ERROR] returnListWithComponentTypeWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.returnListWithComponentTypeWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:101)
-
-[ERROR] returnListWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.returnListWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:94)
-
-[ERROR] objectTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.objectTypeArgWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:26)
-
-[ERROR] voidFunctionWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.voidFunctionWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:12)
-
-[ERROR] listTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.listTypeArgWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:50)
-
-[ERROR] intTypeArgWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.intTypeArgWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:32)
-
-[ERROR] booleanTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.booleanTypeArgWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:38)
-
-[ERROR] returnIntWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.NullPointerException
-	at edu.montana.csci.csci468.eval.CatscriptFunctionArgsAndReturnEvalTest.returnIntWorksProperly(CatscriptFunctionArgsAndReturnEvalTest.java:82)
-
-[INFO] Running edu.montana.csci.csci468.eval.CatscriptBasicExpressionEvalTest
-[ERROR] Tests run: 8, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.017 s <<< FAILURE! - in edu.montana.csci.csci468.eval.CatscriptBasicExpressionEvalTest
-[ERROR] literalExpressionsEvaluatesProperly  Time elapsed: 0 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: java.util.Arrays$ArrayList@4d9e68d0<[1, 2, 3]> but was: java.util.ArrayList@42e99e4a<[1, 2, 3]>
-	at edu.montana.csci.csci468.eval.CatscriptBasicExpressionEvalTest.literalExpressionsEvaluatesProperly(CatscriptBasicExpressionEvalTest.java:18)
-
-[INFO] Running edu.montana.csci.csci468.tokenizer.CatScriptTokenizerTest
-[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 s - in edu.montana.csci.csci468.tokenizer.CatScriptTokenizerTest
-[INFO] 
-[INFO] Results:
-[INFO] 
-[ERROR] Failures: 
-[ERROR]   CatscriptBasicExpressionEvalTest.literalExpressionsEvaluatesProperly:18 expected: java.util.Arrays$ArrayList@4d9e68d0<[1, 2, 3]> but was: java.util.ArrayList@42e99e4a<[1, 2, 3]>
-[ERROR] Errors: 
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.booleanTypeArgWorksProperly:38->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.intTypeArgWorksProperly:32->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.listTypeArgWorksProperly:50->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.listTypeWithComponentTypeArgWorksProperly:56->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.mutliArgumentFunctionsWork:62->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.noTypeArgWorksProperly:20->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.objectTypeArgWorksProperly:26->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.returnBoolWorksProperly:88->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.returnIntWorksProperly:82->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.returnListWithComponentTypeWorksProperly:101->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.returnListWorksProperly:94->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.returnObjectWorksProperly:72->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.stringTypeArgWorksProperly:44->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptFunctionArgsAndReturnEvalTest.voidFunctionWorksProperly:12->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptStatementExecutionTest.forStatementWorksProperly:61->CatscriptTestBase.executeProgram:103 » UnsupportedOperation
-[ERROR]   CatscriptStatementExecutionTest.functionDeclarationWorksProperly:66->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptStatementExecutionTest.ifStatementWorksProperly:24->CatscriptTestBase.executeProgram:103 » UnsupportedOperation
-[ERROR]   CatscriptStatementExecutionTest.localVarStatementsWorkProperly:43->CatscriptTestBase.executeProgram:103 » UnsupportedOperation
-[ERROR]   CatscriptStatementExecutionTest.recursiveFunctionWorksProperly:75->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptStatementExecutionTest.returnStatementWorks:88->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptStatementExecutionTest.varInsideFunctionWorksProperly:51->CatscriptTestBase.executeProgram:101 » NullPointer
-[ERROR]   CatscriptStatementExecutionTest.varStatementWorksProperly:32->CatscriptTestBase.executeProgram:103 » UnsupportedOperation
-[ERROR]   CatscriptParserStatementsTest.functionCallStatement:136->CatscriptTestBase.parseStatement:45->CatscriptTestBase.parseStatement:54 » NullPointer
-[ERROR]   CatscriptParserStatementsTest.functionDefStatement:144->CatscriptTestBase.parseStatement:41->CatscriptTestBase.parseStatement:45->CatscriptTestBase.parseStatement:54 » NullPointer
-[ERROR]   CatscriptParserStatementsTest.functionDefWithParamTypesStatement:166->CatscriptTestBase.parseStatement:41->CatscriptTestBase.parseStatement:45->CatscriptTestBase.parseStatement:54 » NullPointer
-[ERROR]   CatscriptParserStatementsTest.functionDefWithParamsStatement:152->CatscriptTestBase.parseStatement:41->CatscriptTestBase.parseStatement:45->CatscriptTestBase.parseStatement:54 » NullPointer
-[ERROR]   CatscriptParserStatementsTest.returnStatementExprInFunction:189->CatscriptTestBase.parseStatement:41->CatscriptTestBase.parseStatement:45->CatscriptTestBase.parseStatement:54 » NullPointer
-[ERROR]   CatscriptParserStatementsTest.returnStatementNoExprInFunction:180->CatscriptTestBase.parseStatement:41->CatscriptTestBase.parseStatement:45->CatscriptTestBase.parseStatement:54 » NullPointer
-[ERROR]   CatscriptParserSymbolCheckingTest.functionFunctionConflict:34->CatscriptTestBase.getParseError:83 » NullPointer
-[ERROR]   CatscriptParserSymbolCheckingTest.functionVarConflict:28->CatscriptTestBase.getParseError:83 » NullPointer
-[ERROR]   CatscriptParserSymbolCheckingTest.ifStatementBranchesDoNotConflic:59->CatscriptTestBase.parseStatement:41->CatscriptTestBase.parseStatement:45->CatscriptTestBase.parseStatement:56 » ParseError
-[ERROR]   CatscriptParserSymbolCheckingTest.paramsConflictWithGlobalVars:46->CatscriptTestBase.getParseError:83 » NullPointer
-[ERROR]   CatscriptParserSymbolCheckingTest.paramsDoNotConflictWithEachOther:52->CatscriptTestBase.parseStatement:41->CatscriptTestBase.parseStatement:45->CatscriptTestBase.parseStatement:54 » NullPointer
-[ERROR]   CatscriptParserSymbolCheckingTest.varFunctionConflict:22->CatscriptTestBase.getParseError:83 » NullPointer
-[ERROR]   CatscriptParserTypeCheckingTest.assignmentTypeError:55->CatscriptTestBase.getParseError:86 » IllegalState
-[ERROR]   CatscriptParserTypeCheckingTest.functionCallsWorkProperly:38->CatscriptTestBase.parseStatement:49->CatscriptTestBase.parseStatement:54 » NullPointer
-[INFO] 
-[ERROR] Tests run: 116, Failures: 1, Errors: 36, Skipped: 0
-[INFO] 
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  13.436 s
-[INFO] Finished at: 2021-03-31T15:21:56-06:00
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.1:test (default-test) on project CSCI_466_Project: There are test failures.
-[ERROR] 
-[ERROR] Please refer to /home/carson/Projects/msu/csci-466-spring2021/grading/scripts/repos/walker_ward/target/surefire-reports for the individual test results.
-[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
