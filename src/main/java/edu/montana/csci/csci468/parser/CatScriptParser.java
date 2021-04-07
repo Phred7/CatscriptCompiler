@@ -254,13 +254,16 @@ public class CatScriptParser {
 
     private Statement parseReturnStatement(FunctionDefinitionStatement functionDefinitionStatement) {
         ReturnStatement returnStatement = new ReturnStatement();
+        Token start = tokens.consumeToken();
+        returnStatement.setStart(start);
         returnStatement.setFunctionDefinition(functionDefinitionStatement);
-        tokens.consumeToken();
         if (tokens.match(RIGHT_BRACE)) {
+            returnStatement.setEnd(start);
             return returnStatement;
             //returnStatement.setExpression(null);
         } else {
             returnStatement.setExpression(parseExpression());
+            //returnStatement.setEnd(tokens.getCurrentToken());
             return returnStatement;
         }
 
