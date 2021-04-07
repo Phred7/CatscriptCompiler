@@ -8,6 +8,7 @@ import edu.montana.csci.csci468.parser.SymbolTable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListLiteralExpression extends Expression {
@@ -61,12 +62,13 @@ public class ListLiteralExpression extends Expression {
 
     @Override
     public Object evaluate(CatscriptRuntime runtime) {
-        /*String temp = getValues().toString();
-        if (temp.length() > 2) {
-            temp = temp.substring(1, temp.length()-1);
-            return Arrays.asList(temp);
-        }*/
-        return getValues();
+        List<Object> list = new ArrayList<>();
+        for (Expression value : values) {
+            Object ob = value.evaluate(runtime);
+            list.add(ob);
+            //runtime.setValue();
+        }
+        return list;
     }
 
     @Override

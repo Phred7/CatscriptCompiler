@@ -414,11 +414,7 @@ public class CatScriptParser {
                 }
             }
             ListLiteralExpression listLiteralExpression = new ListLiteralExpression(list);
-            if (!tokens.match(RIGHT_BRACKET)) {
-                listLiteralExpression.addError(ErrorType.UNTERMINATED_LIST);
-            } else {
-                tokens.consumeToken();
-            }
+            require(RIGHT_BRACKET, listLiteralExpression, ErrorType.UNTERMINATED_LIST);
             return listLiteralExpression;
         } else if (tokens.match(LEFT_PAREN)){
             Token leftParenToken = tokens.consumeToken();
