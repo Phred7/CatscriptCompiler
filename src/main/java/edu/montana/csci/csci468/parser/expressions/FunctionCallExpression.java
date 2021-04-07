@@ -71,7 +71,7 @@ public class FunctionCallExpression extends Expression {
         for (Expression argument : arguments) {
             args.add(argument.evaluate(runtime));
         }
-        //return super.evaluate(runtime);
+        function.invoke(runtime, args);
         return function;
     }
 

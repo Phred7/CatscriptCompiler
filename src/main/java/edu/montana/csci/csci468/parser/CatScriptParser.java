@@ -193,8 +193,8 @@ public class CatScriptParser {
         functionDefinitionStatement.setStart(startToken);
         Token functionName = require(IDENTIFIER, functionDefinitionStatement);
         require(LEFT_PAREN, functionDefinitionStatement);
-        List<CatscriptType> argumentTypeList = new ArrayList<>();
-        List<String> argumentList = new ArrayList<>();
+        //List<CatscriptType> argumentTypeList = new ArrayList<>();
+        //List<String> argumentList = new ArrayList<>();
         while (!tokens.match(RIGHT_PAREN) && !tokens.match(EOF)) {
             Token paramIdentifier = require(IDENTIFIER, functionDefinitionStatement);
             if(tokens.matchAndConsume(COLON)) {
@@ -232,6 +232,12 @@ public class CatScriptParser {
     }
 
     private Statement parseFunctionCallStatement(Token functionIdentifier) {
+        Boolean flag = false;
+        if(!tokens.match(LEFT_PAREN)) {
+            flag = true;
+        }
+        Token leftParen = tokens.consumeToken(); //paren
+
         List<Expression> args = new ArrayList<>();
         while(!tokens.match(RIGHT_PAREN) && !tokens.match(EOF)){
             Expression elem = parseExpression();
@@ -241,6 +247,9 @@ public class CatScriptParser {
             }
         }
         FunctionCallExpression functionCallExpression = new FunctionCallExpression(functionIdentifier.getStringValue(), args);
+        if(flag == true) {
+            functionCallExpression.addError(ErrorType.UNEXPECTED_TOKEN); // missing left paren
+        }
         require(RIGHT_PAREN, functionCallExpression, ErrorType.UNTERMINATED_ARG_LIST);
 
 

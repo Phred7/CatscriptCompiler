@@ -146,10 +146,12 @@ public class FunctionDefinitionStatement extends Statement {
     //==============================================================
     @Override
     public void execute(CatscriptRuntime runtime) {
-        //return runtime.getValue(this.getName());
-        for (CatscriptType argumentType : argumentTypes) {
+        //FunctionDefinitionStatement function = getProgram().getFunction(getName());
 
-        }
+        //return runtime.getValue(this.getName());
+        //for (CatscriptType argumentType : argumentTypes) {
+
+        //}
         //runtime.setValue(name, );
         return;
     }
