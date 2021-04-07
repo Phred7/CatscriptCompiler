@@ -99,6 +99,7 @@ public class FunctionDefinitionStatement extends Statement {
 
     private boolean validateReturnCoverage(List<Statement> statements) {
         // TODO - implement return coverage checking
+        // recursive function... check all branches... last statement is a return or a conditional that is covered
         return true;
     }
 
@@ -146,13 +147,6 @@ public class FunctionDefinitionStatement extends Statement {
     //==============================================================
     @Override
     public void execute(CatscriptRuntime runtime) {
-        //FunctionDefinitionStatement function = getProgram().getFunction(getName());
-
-        //return runtime.getValue(this.getName());
-        //for (CatscriptType argumentType : argumentTypes) {
-
-        //}
-        //runtime.setValue(name, );
         return;
     }
 

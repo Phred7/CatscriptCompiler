@@ -264,29 +264,9 @@ public class CatScriptParser {
         }
         require(RIGHT_PAREN, functionCallExpression, ErrorType.UNTERMINATED_ARG_LIST);
 
-
-        //FunctionCallExpression funcCallExpr = parsePrimaryExpression();
-        //require(LEFT_PAREN, )
-        //FunctionCallExpression funcCallExpr = new FunctionCallExpression(functionIdentifier.getStringValue(), );
         FunctionCallStatement funcStmt = new FunctionCallStatement(functionCallExpression);
         funcStmt.setStart(functionIdentifier);
         return funcStmt;
-    }
-
-    private Statement parseReturnStatement(FunctionDefinitionStatement functionDefinitionStatement) {
-        ReturnStatement returnStatement = new ReturnStatement();
-        Token start = tokens.consumeToken();
-        returnStatement.setStart(start);
-        returnStatement.setFunctionDefinition(functionDefinitionStatement);
-        if (tokens.match(RIGHT_BRACE)) {
-            returnStatement.setEnd(start);
-            return returnStatement;
-            //returnStatement.setExpression(null);
-        } else {
-            returnStatement.setExpression(parseExpression());
-            //returnStatement.setEnd(tokens.getCurrentToken());
-            return returnStatement;
-        }
     }
 
     private Statement parseReturnStatement() {
@@ -487,6 +467,7 @@ public class CatScriptParser {
                     TypeLiteral typeLiteral = new TypeLiteral();
                     typeLiteral.setStart(startToken);
                     typeLiteral.setType(listType);
+                    tokens.matchAndConsume(GREATER);
                     return typeLiteral;
                 } else {
                     TypeLiteral typeLiteral = new TypeLiteral();

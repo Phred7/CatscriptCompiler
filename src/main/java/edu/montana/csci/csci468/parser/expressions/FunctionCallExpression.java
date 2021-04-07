@@ -72,7 +72,7 @@ public class FunctionCallExpression extends Expression {
             args.add(argument.evaluate(runtime));
         }
         Object ob = function.invoke(runtime, args);
-        return function;
+        return ob;
     }
 
     @Override

@@ -31,12 +31,20 @@ public class ListLiteralExpression extends Expression {
             value.validate(symbolTable);
         }
         if (values.size() > 0) {
+            CatscriptType inferedType = CatscriptType.NULL;
             type = CatscriptType.getListType(values.get(0).getType());
-            /*for (Expression value : this.values) {
-                if(!value.getType().equals(type)) {
-                    addError(ErrorType.INCOMPATIBLE_TYPES); //necessary?
+            for (Expression value : this.values) {
+                CatscriptType componentType = value.getType();
+                if (!inferedType.isAssignableFrom(componentType)) {
+                    if (inferedType == CatscriptType.NULL) {
+                        inferedType = componentType;
+                    } else {
+                        inferedType = CatscriptType.OBJECT;
+                    }
+                    //addError(ErrorType.INCOMPATIBLE_TYPES); //necessary?
                 }
-            }*/
+            }
+            inferedType = CatscriptType.getListType(values.get(0).getType());
         } else {
             type = CatscriptType.getListType(CatscriptType.OBJECT);
         }
