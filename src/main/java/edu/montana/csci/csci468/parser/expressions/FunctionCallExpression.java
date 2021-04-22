@@ -7,9 +7,11 @@ import edu.montana.csci.csci468.parser.ErrorType;
 import edu.montana.csci.csci468.parser.ParseError;
 import edu.montana.csci.csci468.parser.SymbolTable;
 import edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement;
+import org.objectweb.asm.Opcodes;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Function;
 
 public class FunctionCallExpression extends Expression {
     private final String name;
@@ -82,7 +84,12 @@ public class FunctionCallExpression extends Expression {
 
     @Override
     public void compile(ByteCodeGenerator code) {
-        super.compile(code);
+        FunctionDefinitionStatement func = getProgram().getFunction(name);
+        //push the this prt
+        for (Expression argument : arguments) {
+            argument.compile(code);
+        }
+        code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, code.getProgramInternalName(), name, func.getDescriptor());
     }
 
 

@@ -4,6 +4,12 @@ import edu.montana.csci.csci468.bytecode.ByteCodeGenerator;
 import edu.montana.csci.csci468.eval.CatscriptRuntime;
 import edu.montana.csci.csci468.parser.SymbolTable;
 import edu.montana.csci.csci468.parser.expressions.Expression;
+import org.objectweb.asm.Opcodes;
+
+import java.io.PrintStream;
+import java.util.Objects;
+
+import static edu.montana.csci.csci468.bytecode.ByteCodeGenerator.internalNameFor;
 
 public class PrintStatement extends Statement {
     private Expression expression;
@@ -37,7 +43,16 @@ public class PrintStatement extends Statement {
 
     @Override
     public void compile(ByteCodeGenerator code) {
-        super.compile(code);
+        expression.compile(code);
+        //code.addMethodInstruction(Opcodes.GETSTATIC, internalNameFor(System.class), "out", "Ljava/io/PrintStream;");
+        //
+
+        //box(code, expression.getType());
+
+        //code.addInstruction(Opcodes.ALOAD);
+        code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, internalNameFor(PrintStream.class),
+                "println", "(Ljava/lang/Object;)V");
+        //super.compile(code);
     }
 
 }
