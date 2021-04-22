@@ -11,7 +11,7 @@
 [INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ CSCI_466_Project ---
 [INFO] Changes detected - recompiling the module!
 [WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
-[INFO] Compiling 47 source files to /home/carson/Projects/msu/csci-466-spring2021/grading/scripts/repos/walker_ward/target/classes
+[INFO] Compiling 48 source files to /home/carson/Projects/msu/csci-466-spring2021/grading/scripts/repos/walker_ward/target/classes
 [WARNING] /home/carson/Projects/msu/csci-466-spring2021/grading/scripts/repos/walker_ward/src/main/java/edu/montana/csci/csci468/bytecode/MethodGenerator.java: /home/carson/Projects/msu/csci-466-spring2021/grading/scripts/repos/walker_ward/src/main/java/edu/montana/csci/csci468/bytecode/MethodGenerator.java uses or overrides a deprecated API.
 [WARNING] /home/carson/Projects/msu/csci-466-spring2021/grading/scripts/repos/walker_ward/src/main/java/edu/montana/csci/csci468/bytecode/MethodGenerator.java: Recompile with -Xlint:deprecation for details.
 [WARNING] /home/carson/Projects/msu/csci-466-spring2021/grading/scripts/repos/walker_ward/src/main/java/edu/montana/csci/csci468/tokenizer/TokenList.java: Some input files use unchecked or unsafe operations.
@@ -34,13 +34,13 @@
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest
-[ERROR] Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.074 s <<< FAILURE! - in edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest
-[ERROR] recursiveFunctionWorksProperly  Time elapsed: 0.052 s  <<< ERROR!
+[ERROR] Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.126 s <<< FAILURE! - in edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest
+[ERROR] recursiveFunctionWorksProperly  Time elapsed: 0.068 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.recursiveFunctionWorksProperly(CatscriptStatementExecutionTest.java:72)
 
-[ERROR] localVarStatementsWorkProperly  Time elapsed: 0.005 s  <<< ERROR!
-java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.ForStatement
+[ERROR] localVarStatementsWorkProperly  Time elapsed: 0.007 s  <<< ERROR!
+java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.VariableStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.localVarStatementsWorkProperly(CatscriptStatementExecutionTest.java:40)
 
 [ERROR] varStatementWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
@@ -55,23 +55,65 @@ java.lang.UnsupportedOperationException: compile needs to be implemented for edu
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.returnStatementWorks(CatscriptStatementExecutionTest.java:85)
 
-[ERROR] varInsideFunctionWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
+[ERROR] varInsideFunctionWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.varInsideFunctionWorksProperly(CatscriptStatementExecutionTest.java:48)
 
-[ERROR] ifStatementWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] ifStatementWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.IfStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.ifStatementWorksProperly(CatscriptStatementExecutionTest.java:21)
 
-[ERROR] forStatementWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.ForStatement
+[ERROR] forStatementWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
+java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.expressions.IdentifierExpression
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.forStatementWorksProperly(CatscriptStatementExecutionTest.java:58)
 
-[ERROR] printStatementWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.PrintStatement
+[ERROR] printStatementWorksProperly  Time elapsed: 0.031 s  <<< ERROR!
+java.lang.IllegalArgumentException: 
+Error at instruction 1: Cannot pop operand off an empty stack. execute()V
+00000 R  :  :     LDC 1
+00001 R  : I  :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V
+00002 ?   :     RETURN
+
+
+	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.printStatementWorksProperly(CatscriptStatementExecutionTest.java:12)
+Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 1: Cannot pop operand off an empty stack.
+	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.printStatementWorksProperly(CatscriptStatementExecutionTest.java:12)
+Caused by: java.lang.IndexOutOfBoundsException: Cannot pop operand off an empty stack.
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.printStatementWorksProperly(CatscriptStatementExecutionTest.java:12)
 
 [INFO] Running edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest
+ JVM Bytecode ===================================
+
+// class version 49.0 (49)
+// access flags 0x1
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram10 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+
+
+  // access flags 0x1
+  public <init>()V
+    ALOAD 0
+    INVOKESPECIAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.<init> ()V
+    RETURN
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public execute()V
+    ALOAD 0
+    LDC 1
+    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+    INVOKESTATIC java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;
+    LDC "a"
+    INVOKESTATIC java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/String.concat (Ljava/lang/String;)Ljava/lang/String;
+    INVOKEVIRTUAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.print (Ljava/lang/Object;)V
+    RETURN
+    MAXSTACK = 3
+    MAXLOCALS = 1
+}
+
+
+ ================================================
  JVM Bytecode ===================================
 
 // class version 49.0 (49)
@@ -90,11 +132,77 @@ public class edu/montana/csci/csci466/bytecode/CatScriptProgram11 extends edu/mo
   // access flags 0x1
   public execute()V
     ALOAD 0
+    LDC "a"
+    INVOKESTATIC java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;
     LDC 1
     INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+    INVOKESTATIC java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/String.concat (Ljava/lang/String;)Ljava/lang/String;
     INVOKEVIRTUAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.print (Ljava/lang/Object;)V
     RETURN
-    MAXSTACK = 2
+    MAXSTACK = 3
+    MAXLOCALS = 1
+}
+
+
+ ================================================
+ JVM Bytecode ===================================
+
+// class version 49.0 (49)
+// access flags 0x1
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram12 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+
+
+  // access flags 0x1
+  public <init>()V
+    ALOAD 0
+    INVOKESPECIAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.<init> ()V
+    RETURN
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public execute()V
+    ALOAD 0
+    ACONST_NULL
+    INVOKESTATIC java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;
+    LDC "a"
+    INVOKESTATIC java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/String.concat (Ljava/lang/String;)Ljava/lang/String;
+    INVOKEVIRTUAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.print (Ljava/lang/Object;)V
+    RETURN
+    MAXSTACK = 3
+    MAXLOCALS = 1
+}
+
+
+ ================================================
+ JVM Bytecode ===================================
+
+// class version 49.0 (49)
+// access flags 0x1
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram13 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+
+
+  // access flags 0x1
+  public <init>()V
+    ALOAD 0
+    INVOKESPECIAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.<init> ()V
+    RETURN
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public execute()V
+    ALOAD 0
+    LDC "a"
+    INVOKESTATIC java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;
+    ACONST_NULL
+    INVOKESTATIC java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/String.concat (Ljava/lang/String;)Ljava/lang/String;
+    INVOKEVIRTUAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.print (Ljava/lang/Object;)V
+    RETURN
+    MAXSTACK = 3
     MAXLOCALS = 1
 }
 
@@ -132,7 +240,35 @@ public class edu/montana/csci/csci466/bytecode/CatScriptProgram14 extends edu/mo
 
 // class version 49.0 (49)
 // access flags 0x1
-public class edu/montana/csci/csci466/bytecode/CatScriptProgram15 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram17 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+
+
+  // access flags 0x1
+  public <init>()V
+    ALOAD 0
+    INVOKESPECIAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.<init> ()V
+    RETURN
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public execute()V
+    ALOAD 0
+    LDC 1
+    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+    INVOKEVIRTUAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.print (Ljava/lang/Object;)V
+    RETURN
+    MAXSTACK = 2
+    MAXLOCALS = 1
+}
+
+
+ ================================================
+ JVM Bytecode ===================================
+
+// class version 49.0 (49)
+// access flags 0x1
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram18 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
 
 
   // access flags 0x1
@@ -162,7 +298,7 @@ public class edu/montana/csci/csci466/bytecode/CatScriptProgram15 extends edu/mo
 
 // class version 49.0 (49)
 // access flags 0x1
-public class edu/montana/csci/csci466/bytecode/CatScriptProgram16 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram19 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
 
 
   // access flags 0x1
@@ -192,7 +328,7 @@ public class edu/montana/csci/csci466/bytecode/CatScriptProgram16 extends edu/mo
 
 // class version 49.0 (49)
 // access flags 0x1
-public class edu/montana/csci/csci466/bytecode/CatScriptProgram17 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram20 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
 
 
   // access flags 0x1
@@ -220,16 +356,58 @@ public class edu/montana/csci/csci466/bytecode/CatScriptProgram17 extends edu/mo
 
 
  ================================================
-[ERROR] Tests run: 8, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 0.04 s <<< FAILURE! - in edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest
-[ERROR] additiveStringExpressionCompilesProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.expressions.StringLiteralExpression
-	at edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest.additiveStringExpressionCompilesProperly(CatscriptBasicExpressionCompileTest.java:40)
+ JVM Bytecode ===================================
 
-[ERROR] literalExpressionsCompilesProperly  Time elapsed: 0.023 s  <<< ERROR!
-java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.expressions.BooleanLiteralExpression
+// class version 49.0 (49)
+// access flags 0x1
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram22 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+
+
+  // access flags 0x1
+  public <init>()V
+    ALOAD 0
+    INVOKESPECIAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.<init> ()V
+    RETURN
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public execute()V
+    ALOAD 0
+    LDC 1
+    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+    LDC 1
+    INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+    INVOKESTATIC java/util/Objects.equals (Ljava/lang/Object;Ljava/lang/Object;)Z
+    INVOKESTATIC java/lang/Boolean.valueOf (Z)Ljava/lang/Boolean;
+    INVOKEVIRTUAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.print (Ljava/lang/Object;)V
+    RETURN
+    MAXSTACK = 3
+    MAXLOCALS = 1
+}
+
+
+ ================================================
+[ERROR] Tests run: 8, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.032 s <<< FAILURE! - in edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest
+[ERROR] literalExpressionsCompilesProperly  Time elapsed: 0.003 s  <<< ERROR!
+java.lang.IllegalArgumentException: 
+Error at instruction 2: Trying to set an inexistant local variable 184 execute()V
+00000 R  :  :     ALOAD 0
+00001 R  : R  :     ICONST_0
+00002 R  : R I  :     ISTORE 184
+00003 ?    :     NOP
+00004 ?    :     DCONST_1
+00005 ?    :     INVOKEVIRTUAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.print (Ljava/lang/Object;)V
+00006 ?    :     RETURN
+
+
+	at edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest.literalExpressionsCompilesProperly(CatscriptBasicExpressionCompileTest.java:12)
+Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 2: Trying to set an inexistant local variable 184
+	at edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest.literalExpressionsCompilesProperly(CatscriptBasicExpressionCompileTest.java:12)
+Caused by: java.lang.IndexOutOfBoundsException: Trying to set an inexistant local variable 184
 	at edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest.literalExpressionsCompilesProperly(CatscriptBasicExpressionCompileTest.java:12)
 
-[ERROR] unaryExpressionCompilesProperly  Time elapsed: 0.002 s  <<< ERROR!
+[ERROR] unaryExpressionCompilesProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.expressions.UnaryExpression
 	at edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest.unaryExpressionCompilesProperly(CatscriptBasicExpressionCompileTest.java:20)
 
@@ -237,16 +415,12 @@ java.lang.UnsupportedOperationException: compile needs to be implemented for edu
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.expressions.FactorExpression
 	at edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest.factorExpressionCompilesProperly(CatscriptBasicExpressionCompileTest.java:26)
 
-[ERROR] equalityExpressionCompilesProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.expressions.EqualityExpression
-	at edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest.equalityExpressionCompilesProperly(CatscriptBasicExpressionCompileTest.java:66)
-
 [ERROR] comparisonExpressionCompilesProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.expressions.ComparisonExpression
 	at edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest.comparisonExpressionCompilesProperly(CatscriptBasicExpressionCompileTest.java:48)
 
 [INFO] Running edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest
-[ERROR] Tests run: 15, Failures: 0, Errors: 15, Skipped: 0, Time elapsed: 0.02 s <<< FAILURE! - in edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest
+[ERROR] Tests run: 15, Failures: 0, Errors: 15, Skipped: 0, Time elapsed: 0.012 s <<< FAILURE! - in edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest
 [ERROR] listTypeWithComponentTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.listTypeWithComponentTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:56)
@@ -255,7 +429,7 @@ java.lang.UnsupportedOperationException: compile needs to be implemented for edu
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.stringTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:44)
 
-[ERROR] noTypeArgWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] noTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.noTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:20)
 
@@ -267,43 +441,43 @@ java.lang.UnsupportedOperationException: compile needs to be implemented for edu
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnBoolWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:88)
 
-[ERROR] returnListWithComponentTypeWorksProperlyWithMultipleReturnOptions  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] returnListWithComponentTypeWorksProperlyWithMultipleReturnOptions  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnListWithComponentTypeWorksProperlyWithMultipleReturnOptions(CatscriptFunctionArgsAndReturnCompileTest.java:107)
 
-[ERROR] returnObjectWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] returnObjectWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnObjectWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:72)
 
-[ERROR] returnListWithComponentTypeWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] returnListWithComponentTypeWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnListWithComponentTypeWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:101)
 
-[ERROR] returnListWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
+[ERROR] returnListWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnListWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:94)
 
-[ERROR] objectTypeArgWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] objectTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.objectTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:26)
 
-[ERROR] voidFunctionWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
+[ERROR] voidFunctionWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.VariableStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.voidFunctionWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:12)
 
-[ERROR] listTypeArgWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
+[ERROR] listTypeArgWorksProperly  Time elapsed: 0.008 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.listTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:50)
 
-[ERROR] intTypeArgWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
+[ERROR] intTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.intTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:32)
 
-[ERROR] booleanTypeArgWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
+[ERROR] booleanTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.booleanTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:38)
 
-[ERROR] returnIntWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] returnIntWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionDefinitionStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnIntWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:82)
 
@@ -311,11 +485,9 @@ java.lang.UnsupportedOperationException: compile needs to be implemented for edu
 [INFO] Results:
 [INFO] 
 [ERROR] Errors: 
-[ERROR]   CatscriptBasicExpressionCompileTest.additiveStringExpressionCompilesProperly:40->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptBasicExpressionCompileTest.comparisonExpressionCompilesProperly:48->CatscriptTestBase.compile:121 » UnsupportedOperation
-[ERROR]   CatscriptBasicExpressionCompileTest.equalityExpressionCompilesProperly:66->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptBasicExpressionCompileTest.factorExpressionCompilesProperly:26->CatscriptTestBase.compile:121 » UnsupportedOperation
-[ERROR]   CatscriptBasicExpressionCompileTest.literalExpressionsCompilesProperly:12->CatscriptTestBase.compile:121 » UnsupportedOperation
+[ERROR]   CatscriptBasicExpressionCompileTest.literalExpressionsCompilesProperly:12->CatscriptTestBase.compile:121 » IllegalArgument
 [ERROR]   CatscriptBasicExpressionCompileTest.unaryExpressionCompilesProperly:20->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptFunctionArgsAndReturnCompileTest.booleanTypeArgWorksProperly:38->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptFunctionArgsAndReturnCompileTest.intTypeArgWorksProperly:32->CatscriptTestBase.compile:121 » UnsupportedOperation
@@ -336,19 +508,19 @@ java.lang.UnsupportedOperationException: compile needs to be implemented for edu
 [ERROR]   CatscriptStatementExecutionTest.functionDeclarationWorksProperly:63->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptStatementExecutionTest.ifStatementWorksProperly:21->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptStatementExecutionTest.localVarStatementsWorkProperly:40->CatscriptTestBase.compile:121 » UnsupportedOperation
-[ERROR]   CatscriptStatementExecutionTest.printStatementWorksProperly:12->CatscriptTestBase.compile:121 » UnsupportedOperation
+[ERROR]   CatscriptStatementExecutionTest.printStatementWorksProperly:12->CatscriptTestBase.compile:121 » IllegalArgument
 [ERROR]   CatscriptStatementExecutionTest.recursiveFunctionWorksProperly:72->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptStatementExecutionTest.returnStatementWorks:85->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptStatementExecutionTest.varInsideFunctionWorksProperly:48->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptStatementExecutionTest.varStatementWorksProperly:29->CatscriptTestBase.compile:121 » UnsupportedOperation
 [INFO] 
-[ERROR] Tests run: 32, Failures: 0, Errors: 30, Skipped: 0
+[ERROR] Tests run: 32, Failures: 0, Errors: 28, Skipped: 0
 [INFO] 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.822 s
-[INFO] Finished at: 2021-04-20T10:07:03-06:00
+[INFO] Total time:  5.400 s
+[INFO] Finished at: 2021-04-22T09:54:48-06:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.1:test (default-test) on project CSCI_466_Project: There are test failures.
 [ERROR] 
