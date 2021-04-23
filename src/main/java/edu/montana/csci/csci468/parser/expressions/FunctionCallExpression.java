@@ -84,6 +84,7 @@ public class FunctionCallExpression extends Expression {
 
     @Override
     public void compile(ByteCodeGenerator code) {
+        code.addVarInstruction(Opcodes.ALOAD, 0);
         FunctionDefinitionStatement func = getProgram().getFunction(name);
         //push the this prt
         for (Expression argument : arguments) {

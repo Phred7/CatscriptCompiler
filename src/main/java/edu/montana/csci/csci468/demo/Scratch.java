@@ -4,10 +4,11 @@ import java.util.Objects;
 
 public class Scratch {
     public static void main(String[] args) {
-        int x = 1;
+        Boolean x = true != false;
         //int y = 1;
+        //int z = x * y;
         //Objects.equals(x, y);
-        System.out.println(x);
+        //System.out.println(x);
 
     }
 }

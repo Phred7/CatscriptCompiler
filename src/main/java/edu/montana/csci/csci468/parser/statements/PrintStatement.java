@@ -44,12 +44,7 @@ public class PrintStatement extends Statement {
     @Override
     public void compile(ByteCodeGenerator code) {
         expression.compile(code);
-        //code.addMethodInstruction(Opcodes.GETSTATIC, internalNameFor(System.class), "out", "Ljava/io/PrintStream;");
-        //
-
-        //box(code, expression.getType());
-
-        //code.addInstruction(Opcodes.ALOAD);
+        code.addInstruction(Opcodes.DUP); //unclear... fixed something... "cannot pop from empty stack"
         code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, internalNameFor(PrintStream.class),
                 "println", "(Ljava/lang/Object;)V");
         //super.compile(code);

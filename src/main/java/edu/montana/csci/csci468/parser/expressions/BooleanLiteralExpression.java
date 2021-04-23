@@ -41,8 +41,7 @@ public class BooleanLiteralExpression extends Expression {
 
     @Override
     public void compile(ByteCodeGenerator code) {
-        code.addInstruction(Opcodes.ICONST_0);
-        code.addInstruction(Opcodes.ISTORE);
+        code.pushConstantOntoStack(booleanValue);
     }
 
 }

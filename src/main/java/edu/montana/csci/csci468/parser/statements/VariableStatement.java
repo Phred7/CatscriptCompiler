@@ -7,6 +7,9 @@ import edu.montana.csci.csci468.parser.ErrorType;
 import edu.montana.csci.csci468.parser.ParseError;
 import edu.montana.csci.csci468.parser.SymbolTable;
 import edu.montana.csci.csci468.parser.expressions.Expression;
+import org.objectweb.asm.Opcodes;
+
+import static edu.montana.csci.csci468.bytecode.ByteCodeGenerator.internalNameFor;
 
 public class VariableStatement extends Statement {
     private Expression expression;
@@ -85,6 +88,25 @@ public class VariableStatement extends Statement {
 
     @Override
     public void compile(ByteCodeGenerator code) {
-        super.compile(code);
+        if(isGlobal()){
+            String descriptor;
+            if (getType() == CatscriptType.INT || getType() == CatscriptType.BOOLEAN) {
+                descriptor = "I";
+            } else {
+                descriptor = "L" + internalNameFor(getType().getJavaType()) + ";";
+            }
+
+            code.addField(getVariableName(), descriptor);
+            code.addFieldInstruction(Opcodes.PUTFIELD, getVariableName(), descriptor, code.getProgramInternalName());
+        } else {
+            Integer localStorageSlotFor = code.createLocalStorageSlotFor(variableName);
+            if (getType() == CatscriptType.INT || (getType() == CatscriptType.BOOLEAN)) {
+                code.addVarInstruction(Opcodes.ISTORE, localStorageSlotFor); // if not an int (or bool)
+            } else {
+                code.addVarInstruction(Opcodes.ASTORE, localStorageSlotFor); // if not an int
+            }
+
+        }
+
     }
 }

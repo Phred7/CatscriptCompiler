@@ -82,7 +82,7 @@ public class EqualityExpression extends Expression {
         box(code, getRightHandSide().getType());
         code.addMethodInstruction(Opcodes.INVOKESTATIC, internalNameFor(Objects.class), "equals", "(Ljava/lang/Object;Ljava/lang/Object;)Z");
 
-        if(!true) {
+        if(!isEqual()) {
             Label setFalse = new Label();
             Label end  = new Label();
             code.addJumpInstruction(Opcodes.IFNE, setFalse);
