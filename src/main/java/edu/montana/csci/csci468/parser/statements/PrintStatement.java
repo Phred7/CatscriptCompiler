@@ -2,6 +2,7 @@ package edu.montana.csci.csci468.parser.statements;
 
 import edu.montana.csci.csci468.bytecode.ByteCodeGenerator;
 import edu.montana.csci.csci468.eval.CatscriptRuntime;
+import edu.montana.csci.csci468.parser.CatscriptType;
 import edu.montana.csci.csci468.parser.SymbolTable;
 import edu.montana.csci.csci468.parser.expressions.Expression;
 import org.objectweb.asm.Opcodes;
@@ -43,11 +44,13 @@ public class PrintStatement extends Statement {
 
     @Override
     public void compile(ByteCodeGenerator code) {
+        code.addVarInstruction(Opcodes.ALOAD, 0);
         expression.compile(code);
-        code.addInstruction(Opcodes.DUP); //unclear... fixed something... "cannot pop from empty stack"
-        code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, internalNameFor(PrintStream.class),
-                "println", "(Ljava/lang/Object;)V");
-        //super.compile(code);
+        if (expression.getType() == CatscriptType.BOOLEAN || expression.getType() == CatscriptType.INT) {
+            code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, internalNameFor(PrintStream.class), "print", "(I)V");
+        } else {
+            code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, internalNameFor(PrintStream.class), "print", "(Ljava/lang/Object;)V");
+        }
     }
 
 }

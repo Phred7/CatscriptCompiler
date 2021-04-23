@@ -37,6 +37,18 @@ public class IdentifierExpression extends Expression {
         }
     }
 
+    public String getDescriptor() {
+        StringBuilder sb = new StringBuilder("");
+        if (type.equals(CatscriptType.VOID)) {
+            sb.append("V");
+        } else if (type.equals(CatscriptType.BOOLEAN) || type.equals(CatscriptType.INT)) {
+            sb.append("I");
+        } else {
+            sb.append("L").append(internalNameFor(getType().getJavaType())).append(";");
+        }
+        return sb.toString();
+    }
+
     //==============================================================
     // Implementation
     //==============================================================
@@ -53,23 +65,20 @@ public class IdentifierExpression extends Expression {
 
     @Override
     public void compile(ByteCodeGenerator code) {
-        Integer integer = code.resolveLocalStorageSlotFor(getName());
-        String descriptor;
-        if (getType() == CatscriptType.INT || getType() == CatscriptType.BOOLEAN) {
-            descriptor = "I";
-        } else {
-            descriptor = "L" + internalNameFor(getType().getJavaType()) + ";";
-        }
-        if (integer != null) {
+        code.addVarInstruction(Opcodes.ALOAD, 0);
+        Integer slotNum = code.resolveLocalStorageSlotFor(getName());
+        String descriptor = getDescriptor();
+        if (slotNum != null) {
             //look up slot
             if (getType() == CatscriptType.INT || (getType() == CatscriptType.BOOLEAN)) {
-                code.addVarInstruction(Opcodes.ILOAD, integer);
+                code.addVarInstruction(Opcodes.ILOAD, slotNum);
             } else {
-                code.addVarInstruction(Opcodes.ALOAD, integer);
+                code.addVarInstruction(Opcodes.ALOAD, slotNum);
             }
         } else {
             //look up field
             code.addFieldInstruction(Opcodes.GETFIELD, getName(), descriptor, code.getProgramInternalName());
+
         }
     }
 

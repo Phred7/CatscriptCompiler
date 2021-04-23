@@ -88,22 +88,28 @@ public class VariableStatement extends Statement {
 
     @Override
     public void compile(ByteCodeGenerator code) {
-        if(isGlobal()){
+        //code.addVarInstruction(Opcodes.ALOAD, 0);
+        //code.addInstruction(Opcodes.DUP);
+
+        //
+        if(isGlobal()){ //store in field
             String descriptor;
             if (getType() == CatscriptType.INT || getType() == CatscriptType.BOOLEAN) {
                 descriptor = "I";
             } else {
                 descriptor = "L" + internalNameFor(getType().getJavaType()) + ";";
             }
-
+            code.addVarInstruction(Opcodes.ALOAD, 0);
+            expression.compile(code);
             code.addField(getVariableName(), descriptor);
             code.addFieldInstruction(Opcodes.PUTFIELD, getVariableName(), descriptor, code.getProgramInternalName());
-        } else {
-            Integer localStorageSlotFor = code.createLocalStorageSlotFor(variableName);
+        } else { //store in slot
+            expression.compile(code);
+            Integer slotForVar = code.createLocalStorageSlotFor(getVariableName());
             if (getType() == CatscriptType.INT || (getType() == CatscriptType.BOOLEAN)) {
-                code.addVarInstruction(Opcodes.ISTORE, localStorageSlotFor); // if not an int (or bool)
+                code.addVarInstruction(Opcodes.ISTORE, slotForVar); // if not an int (or bool)
             } else {
-                code.addVarInstruction(Opcodes.ASTORE, localStorageSlotFor); // if not an int
+                code.addVarInstruction(Opcodes.ASTORE, slotForVar); // if not an int
             }
 
         }
