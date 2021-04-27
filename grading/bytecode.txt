@@ -34,149 +34,151 @@
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest
-[ERROR] Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.38 s <<< FAILURE! - in edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest
-[ERROR] recursiveFunctionWorksProperly  Time elapsed: 0.186 s  <<< ERROR!
+ JVM Bytecode ===================================
+
+// class version 49.0 (49)
+// access flags 0x1
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram3 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+
+
+  // access flags 0x2
+  private I x
+
+  // access flags 0x2
+  private I y
+
+  // access flags 0x1
+  public <init>()V
+    ALOAD 0
+    INVOKESPECIAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.<init> ()V
+    RETURN
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public execute()V
+    ALOAD 0
+    LDC 1
+    PUTFIELD edu/montana/csci/csci466/bytecode/CatScriptProgram3.x : I
+    ALOAD 0
+    ALOAD 0
+    GETFIELD edu/montana/csci/csci466/bytecode/CatScriptProgram3.x : I
+    PUTFIELD edu/montana/csci/csci466/bytecode/CatScriptProgram3.y : I
+    ALOAD 0
+    ALOAD 0
+    GETFIELD edu/montana/csci/csci466/bytecode/CatScriptProgram3.y : I
+    INVOKEVIRTUAL java/io/PrintStream.print (I)V
+    RETURN
+    MAXSTACK = 2
+    MAXLOCALS = 1
+}
+
+
+ ================================================
+ JVM Bytecode ===================================
+
+// class version 49.0 (49)
+// access flags 0x1
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram7 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+
+
+  // access flags 0x1
+  public <init>()V
+    ALOAD 0
+    INVOKESPECIAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.<init> ()V
+    RETURN
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public execute()V
+    LDC 1
+    IFEQ L0
+    ALOAD 0
+    LDC 1
+    INVOKEVIRTUAL java/io/PrintStream.print (I)V
+    GOTO L0
+   L0
+   FRAME FULL [edu/montana/csci/csci466/bytecode/CatScriptProgram7] []
+    RETURN
+    MAXSTACK = 2
+    MAXLOCALS = 1
+}
+
+
+ ================================================
+ JVM Bytecode ===================================
+
+// class version 49.0 (49)
+// access flags 0x1
+public class edu/montana/csci/csci466/bytecode/CatScriptProgram9 extends edu/montana/csci/csci468/parser/statements/CatScriptProgram {
+
+
+  // access flags 0x1
+  public <init>()V
+    ALOAD 0
+    INVOKESPECIAL edu/montana/csci/csci468/parser/statements/CatScriptProgram.<init> ()V
+    RETURN
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public execute()V
+    ALOAD 0
+    LDC 1
+    INVOKEVIRTUAL java/io/PrintStream.print (I)V
+    RETURN
+    MAXSTACK = 2
+    MAXLOCALS = 1
+}
+
+
+ ================================================
+[ERROR] Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.111 s <<< FAILURE! - in edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest
+[ERROR] recursiveFunctionWorksProperly  Time elapsed: 0.057 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionCallStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.recursiveFunctionWorksProperly(CatscriptStatementExecutionTest.java:72)
 
-[ERROR] localVarStatementsWorkProperly  Time elapsed: 0.015 s  <<< ERROR!
-java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 0
+[ERROR] localVarStatementsWorkProperly  Time elapsed: 0.006 s  <<< ERROR!
+java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.localVarStatementsWorkProperly(CatscriptStatementExecutionTest.java:40)
 
-[ERROR] varStatementWorksProperly  Time elapsed: 0.095 s  <<< ERROR!
-java.lang.IllegalArgumentException: 
-Error at instruction 0: Cannot pop operand off an empty stack. execute()V
-00000 R  :  :     PUTFIELD edu/montana/csci/csci466/bytecode/CatScriptProgram3.x : I
-00001 ?  :     GETFIELD edu/montana/csci/csci466/bytecode/CatScriptProgram3.x : I
-00002 ?  :     DUP
-00003 ?  :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V
-00004 ?  :     RETURN
+[ERROR] varStatementWorksProperly  Time elapsed: 0.03 s  <<< ERROR!
+java.lang.VerifyError: (class: edu/montana/csci/csci466/bytecode/CatScriptProgram3, method: execute signature: ()V) Incompatible object argument for function call
+	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.varStatementWorksProperly(CatscriptStatementExecutionTest.java:31)
 
-
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.varStatementWorksProperly(CatscriptStatementExecutionTest.java:29)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 0: Cannot pop operand off an empty stack.
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.varStatementWorksProperly(CatscriptStatementExecutionTest.java:29)
-Caused by: java.lang.IndexOutOfBoundsException: Cannot pop operand off an empty stack.
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.varStatementWorksProperly(CatscriptStatementExecutionTest.java:29)
-
-[ERROR] functionDeclarationWorksProperly  Time elapsed: 0.008 s  <<< ERROR!
+[ERROR] functionDeclarationWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionCallStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.functionDeclarationWorksProperly(CatscriptStatementExecutionTest.java:63)
 
-[ERROR] returnStatementWorks  Time elapsed: 0 s  <<< ERROR!
+[ERROR] returnStatementWorks  Time elapsed: 0.001 s  <<< ERROR!
 java.lang.IllegalArgumentException: 
-Error at instruction 4: Method owner: expected R, but found I execute()V
-00000 R  :  :     ALOAD 0
-00001 R  : R  :     LDC 9
-00002 R  : R I  :     INVOKEVIRTUAL edu/montana/csci/csci466/bytecode/CatScriptProgram5.foo (I)I
-00003 R  : I  :     DUP
-00004 R  : I I  :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V
-00005 ?    :     RETURN
+Execution can fall off the end of the code foo(I)I
 
 
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.returnStatementWorks(CatscriptStatementExecutionTest.java:85)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 4: Method owner: expected R, but found I
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.returnStatementWorks(CatscriptStatementExecutionTest.java:85)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Method owner: expected R, but found I
+Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Execution can fall off the end of the code
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.returnStatementWorks(CatscriptStatementExecutionTest.java:85)
 
-[ERROR] varInsideFunctionWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] varInsideFunctionWorksProperly  Time elapsed: 0.002 s  <<< ERROR!
 java.lang.IllegalArgumentException: 
-Error at instruction 3: Method owner: expected R, but found I execute()V
-00000 R  :  :     ALOAD 0
-00001 R  : R  :     INVOKEVIRTUAL edu/montana/csci/csci466/bytecode/CatScriptProgram6.foo ()I
-00002 R  : I  :     DUP
-00003 R  : I I  :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V
-00004 ?    :     RETURN
+Execution can fall off the end of the code foo()I
 
 
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.varInsideFunctionWorksProperly(CatscriptStatementExecutionTest.java:48)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 3: Method owner: expected R, but found I
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.varInsideFunctionWorksProperly(CatscriptStatementExecutionTest.java:48)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Method owner: expected R, but found I
+Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Execution can fall off the end of the code
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.varInsideFunctionWorksProperly(CatscriptStatementExecutionTest.java:48)
 
-[ERROR] ifStatementWorksProperly  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalArgumentException: 
-Error at instruction 4: Method owner: expected R, but found I execute()V
-00000 R  :  :     LDC 1
-00001 R  : I  :     IFEQ L0
-00002 R  :  :     LDC 1
-00003 R  : I  :     DUP
-00004 R  : I I  :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V
-00005 ?    :     GOTO L0
-00006 R  :  :    L0
-00007 R  :  :    FRAME FULL [edu/montana/csci/csci466/bytecode/CatScriptProgram7] []
-00008 R  :  :     RETURN
-
-
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.ifStatementWorksProperly(CatscriptStatementExecutionTest.java:21)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 4: Method owner: expected R, but found I
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.ifStatementWorksProperly(CatscriptStatementExecutionTest.java:21)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Method owner: expected R, but found I
+[ERROR] ifStatementWorksProperly  Time elapsed: 0.004 s  <<< ERROR!
+java.lang.VerifyError: (class: edu/montana/csci/csci466/bytecode/CatScriptProgram7, method: execute signature: ()V) Incompatible object argument for function call
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.ifStatementWorksProperly(CatscriptStatementExecutionTest.java:21)
 
-[ERROR] forStatementWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.IllegalArgumentException: 
-Error at instruction 32: Method owner: expected R, but found I execute()V
-00000 R . .  :  :     NEW java/util/LinkedList
-00001 R . .  : R  :     DUP
-00002 R . .  : R R  :     INVOKESPECIAL java/util/LinkedList.<init> ()V
-00003 R . .  : R  :     DUP
-00004 R . .  : R R  :     LDC 1
-00005 R . .  : R R I  :     INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
-00006 R . .  : R R R  :     INVOKEVIRTUAL java/util/LinkedList.add (Ljava/lang/Object;)Z
-00007 R . .  : R I  :     POP
-00008 R . .  : R  :     DUP
-00009 R . .  : R R  :     LDC 2
-00010 R . .  : R R I  :     INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
-00011 R . .  : R R R  :     INVOKEVIRTUAL java/util/LinkedList.add (Ljava/lang/Object;)Z
-00012 R . .  : R I  :     POP
-00013 R . .  : R  :     DUP
-00014 R . .  : R R  :     LDC 3
-00015 R . .  : R R I  :     INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
-00016 R . .  : R R R  :     INVOKEVIRTUAL java/util/LinkedList.add (Ljava/lang/Object;)Z
-00017 R . .  : R I  :     POP
-00018 R . .  : R  :     INVOKEINTERFACE java/util/List.iterator ()Ljava/util/Iterator; (itf)
-00019 R . .  : R  :     ASTORE 1
-00020 R R .  :  :    L0
-00021 R R .  :  :    FRAME FULL [edu/montana/csci/csci466/bytecode/CatScriptProgram8 java/util/Iterator] []
-00022 R R .  :  :     ALOAD 1
-00023 R R .  : R  :     INVOKEINTERFACE java/util/Iterator.hasNext ()Z (itf)
-00024 R R .  : I  :     IFEQ L1
-00025 R R .  :  :     ALOAD 1
-00026 R R .  : R  :     INVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object; (itf)
-00027 R R .  : R  :     CHECKCAST java/lang/Integer
-00028 R R .  : R  :     INVOKEVIRTUAL java/lang/Integer.intValue ()I
-00029 R R .  : I  :     ISTORE 2
-00030 R R I  :  :     ILOAD 2
-00031 R R I  : I  :     DUP
-00032 R R I  : I I  :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V
-00033 ?       :     GOTO L0
-00034 R R .  :  :    L1
-00035 R R .  :  :    FRAME FULL [edu/montana/csci/csci466/bytecode/CatScriptProgram8 java/util/Iterator] []
-00036 R R .  :  :     RETURN
-
-
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.forStatementWorksProperly(CatscriptStatementExecutionTest.java:58)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 32: Method owner: expected R, but found I
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.forStatementWorksProperly(CatscriptStatementExecutionTest.java:58)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Method owner: expected R, but found I
+[ERROR] forStatementWorksProperly  Time elapsed: 0 s  <<< ERROR!
+java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.forStatementWorksProperly(CatscriptStatementExecutionTest.java:58)
 
-[ERROR] printStatementWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.IllegalArgumentException: 
-Error at instruction 2: Method owner: expected R, but found I execute()V
-00000 R  :  :     LDC 1
-00001 R  : I  :     DUP
-00002 R  : I I  :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V
-00003 ?    :     RETURN
-
-
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.printStatementWorksProperly(CatscriptStatementExecutionTest.java:12)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 2: Method owner: expected R, but found I
-	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.printStatementWorksProperly(CatscriptStatementExecutionTest.java:12)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Method owner: expected R, but found I
+[ERROR] printStatementWorksProperly  Time elapsed: 0.003 s  <<< ERROR!
+java.lang.VerifyError: (class: edu/montana/csci/csci466/bytecode/CatScriptProgram9, method: execute signature: ()V) Incompatible object argument for function call
 	at edu.montana.csci.csci468.bytecode.CatscriptStatementExecutionTest.printStatementWorksProperly(CatscriptStatementExecutionTest.java:12)
 
 [INFO] Running edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest
@@ -1358,9 +1360,9 @@ public class edu/montana/csci/csci466/bytecode/CatScriptProgram44 extends edu/mo
 
 
  ================================================
-[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.263 s - in edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.101 s - in edu.montana.csci.csci468.bytecode.CatscriptBasicExpressionCompileTest
 [INFO] Running edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest
-[ERROR] Tests run: 15, Failures: 0, Errors: 15, Skipped: 0, Time elapsed: 0.011 s <<< FAILURE! - in edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest
+[ERROR] Tests run: 15, Failures: 0, Errors: 15, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest
 [ERROR] listTypeWithComponentTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionCallStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.listTypeWithComponentTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:56)
@@ -1373,24 +1375,17 @@ java.lang.UnsupportedOperationException: compile needs to be implemented for edu
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionCallStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.noTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:20)
 
-[ERROR] mutliArgumentFunctionsWork  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] mutliArgumentFunctionsWork  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionCallStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.mutliArgumentFunctionsWork(CatscriptFunctionArgsAndReturnCompileTest.java:62)
 
 [ERROR] returnBoolWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.IllegalArgumentException: 
-Error at instruction 3: Method owner: expected R, but found I execute()V
-00000 R  :  :     ALOAD 0
-00001 R  : R  :     INVOKEVIRTUAL edu/montana/csci/csci466/bytecode/CatScriptProgram49.foo ()I
-00002 R  : I  :     DUP
-00003 R  : I I  :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V
-00004 ?    :     RETURN
+Execution can fall off the end of the code foo()I
 
 
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnBoolWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:88)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 3: Method owner: expected R, but found I
-	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnBoolWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:88)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Method owner: expected R, but found I
+Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Execution can fall off the end of the code
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnBoolWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:88)
 
 [ERROR] returnListWithComponentTypeWorksProperlyWithMultipleReturnOptions  Time elapsed: 0 s  <<< ERROR!
@@ -1402,7 +1397,7 @@ Execution can fall off the end of the code foo()Ljava/util/List;
 Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Execution can fall off the end of the code
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnListWithComponentTypeWorksProperlyWithMultipleReturnOptions(CatscriptFunctionArgsAndReturnCompileTest.java:107)
 
-[ERROR] returnObjectWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] returnObjectWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.IllegalArgumentException: 
 Execution can fall off the end of the code foo()Ljava/lang/Object;
 
@@ -1445,24 +1440,17 @@ java.lang.UnsupportedOperationException: compile needs to be implemented for edu
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionCallStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.intTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:32)
 
-[ERROR] booleanTypeArgWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
+[ERROR] booleanTypeArgWorksProperly  Time elapsed: 0 s  <<< ERROR!
 java.lang.UnsupportedOperationException: compile needs to be implemented for edu.montana.csci.csci468.parser.statements.FunctionCallStatement
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.booleanTypeArgWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:38)
 
-[ERROR] returnIntWorksProperly  Time elapsed: 0.006 s  <<< ERROR!
+[ERROR] returnIntWorksProperly  Time elapsed: 0.001 s  <<< ERROR!
 java.lang.IllegalArgumentException: 
-Error at instruction 3: Method owner: expected R, but found I execute()V
-00000 R  :  :     ALOAD 0
-00001 R  : R  :     INVOKEVIRTUAL edu/montana/csci/csci466/bytecode/CatScriptProgram59.foo ()I
-00002 R  : I  :     DUP
-00003 R  : I I  :     INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V
-00004 ?    :     RETURN
+Execution can fall off the end of the code foo()I
 
 
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnIntWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:82)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 3: Method owner: expected R, but found I
-	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnIntWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:82)
-Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Method owner: expected R, but found I
+Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Execution can fall off the end of the code
 	at edu.montana.csci.csci468.bytecode.CatscriptFunctionArgsAndReturnCompileTest.returnIntWorksProperly(CatscriptFunctionArgsAndReturnCompileTest.java:82)
 
 [INFO] 
@@ -1484,23 +1472,23 @@ Caused by: org.objectweb.asm.tree.analysis.AnalyzerException: Method owner: expe
 [ERROR]   CatscriptFunctionArgsAndReturnCompileTest.returnObjectWorksProperly:72->CatscriptTestBase.compile:121 » IllegalArgument
 [ERROR]   CatscriptFunctionArgsAndReturnCompileTest.stringTypeArgWorksProperly:44->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptFunctionArgsAndReturnCompileTest.voidFunctionWorksProperly:12->CatscriptTestBase.compile:121 » UnsupportedOperation
-[ERROR]   CatscriptStatementExecutionTest.forStatementWorksProperly:58->CatscriptTestBase.compile:121 » IllegalArgument
+[ERROR]   CatscriptStatementExecutionTest.forStatementWorksProperly:58->CatscriptTestBase.compile:121 » ArrayIndexOutOfBounds
 [ERROR]   CatscriptStatementExecutionTest.functionDeclarationWorksProperly:63->CatscriptTestBase.compile:121 » UnsupportedOperation
-[ERROR]   CatscriptStatementExecutionTest.ifStatementWorksProperly:21->CatscriptTestBase.compile:121 » IllegalArgument
+[ERROR]   CatscriptStatementExecutionTest.ifStatementWorksProperly:21->CatscriptTestBase.compile:121 » Verify
 [ERROR]   CatscriptStatementExecutionTest.localVarStatementsWorkProperly:40->CatscriptTestBase.compile:121 » ArrayIndexOutOfBounds
-[ERROR]   CatscriptStatementExecutionTest.printStatementWorksProperly:12->CatscriptTestBase.compile:121 » IllegalArgument
+[ERROR]   CatscriptStatementExecutionTest.printStatementWorksProperly:12->CatscriptTestBase.compile:121 » Verify
 [ERROR]   CatscriptStatementExecutionTest.recursiveFunctionWorksProperly:72->CatscriptTestBase.compile:121 » UnsupportedOperation
 [ERROR]   CatscriptStatementExecutionTest.returnStatementWorks:85->CatscriptTestBase.compile:121 » IllegalArgument
 [ERROR]   CatscriptStatementExecutionTest.varInsideFunctionWorksProperly:48->CatscriptTestBase.compile:121 » IllegalArgument
-[ERROR]   CatscriptStatementExecutionTest.varStatementWorksProperly:29->CatscriptTestBase.compile:121 » IllegalArgument
+[ERROR]   CatscriptStatementExecutionTest.varStatementWorksProperly:31->CatscriptTestBase.compile:121 » Verify
 [INFO] 
 [ERROR] Tests run: 32, Failures: 0, Errors: 24, Skipped: 0
 [INFO] 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  16.040 s
-[INFO] Finished at: 2021-04-23T12:14:13-06:00
+[INFO] Total time:  4.337 s
+[INFO] Finished at: 2021-04-27T10:44:21-06:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.1:test (default-test) on project CSCI_466_Project: There are test failures.
 [ERROR] 
