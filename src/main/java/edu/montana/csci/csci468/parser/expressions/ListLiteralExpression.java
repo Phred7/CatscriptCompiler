@@ -48,7 +48,7 @@ public class ListLiteralExpression extends Expression {
                     //addError(ErrorType.INCOMPATIBLE_TYPES); //necessary?
                 }
             }
-            inferedType = CatscriptType.getListType(values.get(0).getType());
+            //inferedType = CatscriptType.getListType(values.get(0).getType());
         } else {
             type = CatscriptType.getListType(CatscriptType.OBJECT);
         }
