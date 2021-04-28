@@ -176,13 +176,15 @@ public class FunctionDefinitionStatement extends Statement {
             statement.compile(code);
         }
 
-        //return?... store the return value somewhere?
+        //return?... store the return value somewhere? Is this even necessary?
         if (type != CatscriptType.VOID) {
             if (getType() == CatscriptType.INT || (getType() == CatscriptType.BOOLEAN)) {
                 code.addInstruction(Opcodes.IRETURN);
             } else {
                 code.addInstruction(Opcodes.ARETURN);
             }
+        } else {
+            code.addInstruction(Opcodes.RETURN);
         }
 
 
