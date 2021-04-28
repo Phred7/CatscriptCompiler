@@ -94,10 +94,6 @@ public class FunctionCallExpression extends Expression {
                 if (argument.getType() == CatscriptType.INT || argument.getType() == CatscriptType.BOOLEAN) { //only if type == Object?... unbox if type is I and arg.type is Object?
                     box(code, argument.getType());
                 }
-                //code.resolveLocalStorageSlotFor(func.getParameterName()) //how to get the slot num for a... nvm don't need to just needs to be on the stack
-                //code.addVarInstruction(Opcodes.ALOAD, code.resolveLocalStorageSlotFor(func.getParameterName(currArgIndex)));
-            } else {
-                //code.addVarInstruction(Opcodes.ILOAD, code.resolveLocalStorageSlotFor(func.getParameterName(currArgIndex)));
             }
 
         }

@@ -159,17 +159,11 @@ public class FunctionDefinitionStatement extends Statement {
     @Override
     public void compile(ByteCodeGenerator code) {
         code.pushMethod(Opcodes.ACC_PUBLIC, getName(), getDescriptor());
-        //code.addVarInstruction(Opcodes.ALOAD, 0);
-        //compile the args?... LOAD them? or create storage for them?
+
         for (String argumentName : argumentNames) {
             CatscriptType currArgType = argumentTypes.get(argumentNames.indexOf(argumentName));
 
             Integer slotForArg = code.createLocalStorageSlotFor(argumentName);
-            /*if (currArgType == CatscriptType.INT || (currArgType == CatscriptType.BOOLEAN)) {
-                code.addVarInstruction(Opcodes.ISTORE, slotForArg); // if not an int (or bool)
-            } else {
-                code.addVarInstruction(Opcodes.ASTORE, slotForArg); // if not an int
-            }*/
         }
 
         //compile the body
@@ -177,7 +171,7 @@ public class FunctionDefinitionStatement extends Statement {
             statement.compile(code);
         }
 
-        //return?... store the return value somewhere? Is this even necessary?
+        //return
         if (type != CatscriptType.VOID) {
             if (getType() == CatscriptType.INT || (getType() == CatscriptType.BOOLEAN)) {
                 code.addInstruction(Opcodes.IRETURN);
