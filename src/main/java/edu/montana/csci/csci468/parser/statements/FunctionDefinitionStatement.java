@@ -162,9 +162,9 @@ public class FunctionDefinitionStatement extends Statement {
 
         //compile the args?... LOAD them? or create storage for them?
         for (String argumentName : argumentNames) {
-
+            CatscriptType currArgType = argumentTypes.get(argumentNames.indexOf(argumentName));
             Integer slotForArg = code.createLocalStorageSlotFor(argumentName);
-            if (getType() == CatscriptType.INT || (getType() == CatscriptType.BOOLEAN)) {
+            if (currArgType == CatscriptType.INT || (currArgType == CatscriptType.BOOLEAN)) {
                 code.addVarInstruction(Opcodes.ISTORE, slotForArg); // if not an int (or bool)
             } else {
                 code.addVarInstruction(Opcodes.ASTORE, slotForArg); // if not an int
@@ -178,7 +178,11 @@ public class FunctionDefinitionStatement extends Statement {
 
         //return?... store the return value somewhere?
         if (type != CatscriptType.VOID) {
-            code.addInstruction(Opcodes.ARETURN);
+            if (getType() == CatscriptType.INT || (getType() == CatscriptType.BOOLEAN)) {
+                code.addInstruction(Opcodes.IRETURN);
+            } else {
+                code.addInstruction(Opcodes.ARETURN);
+            }
         }
 
 
