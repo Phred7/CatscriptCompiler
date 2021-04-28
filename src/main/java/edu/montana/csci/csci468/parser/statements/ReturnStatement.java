@@ -57,7 +57,15 @@ public class ReturnStatement extends Statement {
     @Override
     public void compile(ByteCodeGenerator code) {
         expression.compile(code);
-        code.addInstruction(Opcodes.IRETURN);
+        if (function.getType() == CatscriptType.INT || function.getType() == CatscriptType.BOOLEAN) {
+            code.addInstruction(Opcodes.IRETURN);
+        } else {
+            if (expression.getType() == CatscriptType.INT || expression.getType() == CatscriptType.BOOLEAN) {
+                box(code, expression.getType());
+            }
+            code.addInstruction(Opcodes.ARETURN);
+        }
+
         //super.compile(code);
     }
 
