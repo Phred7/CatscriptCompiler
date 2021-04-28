@@ -43,14 +43,13 @@ public class PrintStatement extends Statement {
     }
 
     @Override
-    public void compile(ByteCodeGenerator code) {
+    public void compile(ByteCodeGenerator code) { //was invoking PrintStream.print instead of CatscriptProgram.print
         code.addVarInstruction(Opcodes.ALOAD, 0);
         expression.compile(code);
         if (expression.getType() == CatscriptType.BOOLEAN || expression.getType() == CatscriptType.INT) {
-            code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, internalNameFor(PrintStream.class), "print", "(I)V");
-        } else {
-            code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, internalNameFor(PrintStream.class), "print", "(Ljava/lang/Object;)V");
+            box(code, expression.getType());
         }
+        code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, internalNameFor(CatScriptProgram.class), "print", "(Ljava/lang/Object;)V");
     }
 
 }
