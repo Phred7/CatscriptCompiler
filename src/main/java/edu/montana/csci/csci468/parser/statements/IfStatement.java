@@ -102,7 +102,7 @@ public class IfStatement extends Statement {
             trueStatement.compile(code);
         }
         code.addJumpInstruction(Opcodes.GOTO, end);
-        if (false) {
+        if (elseStatements.size() > 0) {
             code.addLabel(elseLabel);
             for (Statement elseStatement : elseStatements) {
                 elseStatement.compile(code);

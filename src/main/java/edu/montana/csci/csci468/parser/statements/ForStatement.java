@@ -96,14 +96,14 @@ public class ForStatement extends Statement {
 
     @Override
     public void compile(ByteCodeGenerator code) {
+
         Integer iteratorSlot = code.nextLocalStorageSlot();
         Label iterationStart = new Label();
         Label end = new Label();
 
+        // get the iterator
         expression.compile(code);
-
-        code.addMethodInstruction(Opcodes.INVOKEINTERFACE, internalNameFor(List.class), "iterator", "()Ljava/util/Iterator;");
-
+        code.addMethodInstruction(Opcodes.INVOKEINTERFACE, internalNameFor(List.class),"iterator", "()Ljava/util/Iterator;");
         code.addVarInstruction(Opcodes.ASTORE, iteratorSlot);
         code.addLabel(iterationStart);
 
@@ -115,7 +115,7 @@ public class ForStatement extends Statement {
         // more code
         CatscriptType componentType = getComponentType();
         code.addVarInstruction(Opcodes.ALOAD, iteratorSlot);
-        code.addMethodInstruction(Opcodes.INVOKEINTERFACE, internalNameFor(Iterator.class), "next", "()Ljava/lang/Object;");
+        code.addMethodInstruction(Opcodes.INVOKEINTERFACE, internalNameFor(Iterator.class),"next", "()Ljava/lang/Object;");
         code.addTypeInstruction(Opcodes.CHECKCAST, internalNameFor(componentType.getJavaType()));
         unbox(code, componentType);
 
