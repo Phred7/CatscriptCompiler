@@ -1,6 +1,7 @@
 package edu.montana.csci.csci468.parser.expressions;
 
 import edu.montana.csci.csci468.bytecode.ByteCodeGenerator;
+import edu.montana.csci.csci468.bytecode.MethodGenerator;
 import edu.montana.csci.csci468.eval.CatscriptRuntime;
 import edu.montana.csci.csci468.parser.CatscriptType;
 import edu.montana.csci.csci468.parser.ErrorType;
@@ -88,6 +89,17 @@ public class FunctionCallExpression extends Expression {
         FunctionDefinitionStatement func = getProgram().getFunction(name);
         for (Expression argument : arguments) {
             argument.compile(code);
+            int currArgIndex = arguments.indexOf(argument);
+            if (func.getParameterType(currArgIndex) == CatscriptType.OBJECT) {
+                if (argument.getType() == CatscriptType.INT || argument.getType() == CatscriptType.BOOLEAN) { //only if type == Object?... unbox if type is I and arg.type is Object?
+                    box(code, argument.getType());
+                }
+                //code.resolveLocalStorageSlotFor(func.getParameterName()) //how to get the slot num for a... nvm don't need to just needs to be on the stack
+                //code.addVarInstruction(Opcodes.ALOAD, code.resolveLocalStorageSlotFor(func.getParameterName(currArgIndex)));
+            } else {
+                //code.addVarInstruction(Opcodes.ILOAD, code.resolveLocalStorageSlotFor(func.getParameterName(currArgIndex)));
+            }
+
         }
         code.addMethodInstruction(Opcodes.INVOKEVIRTUAL, code.getProgramInternalName(), name, func.getDescriptor());
     }

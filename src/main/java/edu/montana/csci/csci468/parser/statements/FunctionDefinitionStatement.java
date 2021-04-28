@@ -160,8 +160,26 @@ public class FunctionDefinitionStatement extends Statement {
     public void compile(ByteCodeGenerator code) {
         code.pushMethod(Opcodes.ACC_PUBLIC, getName(), getDescriptor());
 
+        //compile the args?... LOAD them? or create storage for them?
+        for (String argumentName : argumentNames) {
 
+            Integer slotForArg = code.createLocalStorageSlotFor(argumentName);
+            if (getType() == CatscriptType.INT || (getType() == CatscriptType.BOOLEAN)) {
+                code.addVarInstruction(Opcodes.ISTORE, slotForArg); // if not an int (or bool)
+            } else {
+                code.addVarInstruction(Opcodes.ASTORE, slotForArg); // if not an int
+            }
+        }
 
+        //compile the body
+        for (Statement statement : body) {
+            statement.compile(code);
+        }
+
+        //return?... store the return value somewhere?
+        if (type != CatscriptType.VOID) {
+            code.addInstruction(Opcodes.ARETURN);
+        }
 
 
         code.popMethod();
