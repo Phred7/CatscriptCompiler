@@ -65,7 +65,6 @@ public class IdentifierExpression extends Expression {
 
     @Override
     public void compile(ByteCodeGenerator code) {
-        code.addVarInstruction(Opcodes.ALOAD, 0);
         Integer slotNum = code.resolveLocalStorageSlotFor(getName());
         String descriptor = getDescriptor();
         if (slotNum != null) {
@@ -77,6 +76,7 @@ public class IdentifierExpression extends Expression {
             }
         } else {
             //look up field
+            code.addVarInstruction(Opcodes.ALOAD, 0);
             code.addFieldInstruction(Opcodes.GETFIELD, getName(), descriptor, code.getProgramInternalName());
 
         }

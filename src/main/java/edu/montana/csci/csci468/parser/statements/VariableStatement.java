@@ -88,10 +88,6 @@ public class VariableStatement extends Statement {
 
     @Override
     public void compile(ByteCodeGenerator code) {
-        //code.addVarInstruction(Opcodes.ALOAD, 0);
-        //code.addInstruction(Opcodes.DUP);
-
-        //
         if(isGlobal()){ //store in field
             String descriptor;
             if (getType() == CatscriptType.INT || getType() == CatscriptType.BOOLEAN) {
