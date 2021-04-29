@@ -1,4 +1,4 @@
 Errors:
 
 - Missing source zip
-- Missing Walker_Ward_portfolio.pdf
+- Missing walker_ward_portfolio.pdf
