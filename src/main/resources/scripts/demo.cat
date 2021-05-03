@@ -1,15 +1,15 @@
 // String
-var x  = "hello catscript!"
-
+var y  = "hello catscript!"
+var x = 20
 // print
-print(x)
+print(y)
 
 // comparisons
 if( x > 10 ) {
     print(x)
 }
 
-// lists List<Integer>
+// lists List
 var lst = [1, 2, 3]
 
 // iteration
@@ -17,6 +17,8 @@ for( i in lst ) {
     print(i)
 }
 
-function foo(x : int, y : String) {
-    print(x)
+function foo(z : int, zz : String) {
+    print(zz)
 }
+
+foo(x, y)
